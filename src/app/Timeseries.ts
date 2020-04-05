@@ -1,6 +1,6 @@
 export type CountryDailyData = Record<string, number[]>;
 
 export interface Timeseries {
-  dates: string[];
+  dates: Date[];
   countries: CountryDailyData;
 }

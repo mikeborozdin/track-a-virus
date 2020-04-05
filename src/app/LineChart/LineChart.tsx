@@ -50,6 +50,18 @@ const LineChart: FC<Props> = ({ data, countryColors }) => {
               labels: data.dates,
               datasets: getCountryDataForChartJs(data, countryColors),
             },
+            options: {
+              scales: {
+                xAxes: [
+                  {
+                    type: 'time',
+                    time: {
+                      unit: 'day',
+                    },
+                  },
+                ],
+              },
+            },
           })
         );
       } else {
