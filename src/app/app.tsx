@@ -37,6 +37,9 @@ const App: React.FC<Props> = ({ rootStore }) => {
       {rootStore.countries && (
         <>
           <div className={styles.span2}>
+            <h1>Covid-19 Dashboard</h1>
+          </div>
+          <div className={styles.span2}>
             <Select
               options={getCountrySelectOptions(rootStore.countries)}
               isMulti
@@ -44,6 +47,7 @@ const App: React.FC<Props> = ({ rootStore }) => {
               onChange={(selected) => {
                 setCountriesToCompare(selected as SelectOption[]);
               }}
+              placeholder='Select countries to compare'
             />
           </div>
           {rootStore.selectedCountriesCases && (
