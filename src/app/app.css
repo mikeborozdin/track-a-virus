@@ -5,6 +5,7 @@ body {
 .col2 {
   display: grid;
   grid-template-columns: none;
+  grid-row-gap: 1rem;
 }
 
 .span2 {
@@ -13,8 +14,8 @@ body {
 
 @media only screen and (min-width: 800px) {
   .col2 {
-    display: grid;
     grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 3%;
   }
 
   .span2 {
