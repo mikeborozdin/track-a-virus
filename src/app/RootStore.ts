@@ -1,7 +1,7 @@
 import { observable, runInAction, action } from 'mobx';
 import randomcolor from 'randomcolor';
 import { Timeseries } from './Timeseries';
-import getData, { getDeaths } from './data/get-data';
+import getCases, { getDeaths } from './data/get-data';
 
 export default class RootStore {
   @observable
@@ -24,7 +24,7 @@ export default class RootStore {
 
   @action.bound
   public async init() {
-    const cases = await getData();
+    const cases = await getCases();
     const deaths = await getDeaths();
 
     runInAction(() => {

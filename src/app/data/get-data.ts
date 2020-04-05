@@ -126,7 +126,7 @@ const getUsDeaths = async (): Promise<number[]> => {
   });
 };
 
-const getData = async () => {
+const getCases = async () => {
   const timeseries = await getNonUsData();
 
   timeseries.countries[US_COUNTRY_NAME] = await getUsData();
@@ -142,4 +142,4 @@ export const getDeaths = async () => {
   return timeseries;
 };
 
-export default getData;
+export default getCases;
