@@ -46,23 +46,23 @@ const App: React.FC<Props> = ({ rootStore }) => {
               }}
             />
           </div>
-          {rootStore.dataForSelectedCountries && (
+          {rootStore.selectedCountriesCases && (
             <>
               <div>
                 <DailyCases
-                  data={rootStore.dataForSelectedCountries}
+                  data={rootStore.selectedCountriesCases}
                   countryColors={rootStore.countryColors}
                 />
               </div>
               <div>
                 <DailyIncrease
-                  data={rootStore.dataForSelectedCountries}
+                  data={rootStore.selectedCountriesCases}
                   countryColors={rootStore.countryColors}
                 />
               </div>
               <div>
                 <DailyIncreasePercentage
-                  data={rootStore.dataForSelectedCountries}
+                  data={rootStore.selectedCountriesCases}
                   countryColors={rootStore.countryColors}
                 />
               </div>

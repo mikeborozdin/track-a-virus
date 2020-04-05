@@ -1,7 +1,7 @@
 import { observable, runInAction, action } from 'mobx';
 import randomcolor from 'randomcolor';
 import { Timeseries } from './Timeseries';
-import getData from './get-data';
+import getData from './data/get-data';
 
 export default class RootStore {
   @observable
@@ -11,19 +11,19 @@ export default class RootStore {
   public countryColors: Record<string, string> = {};
 
   @observable
-  public data: Timeseries;
+  public allCases: Timeseries;
 
   @observable
-  public dataForSelectedCountries: Timeseries = null;
+  public selectedCountriesCases: Timeseries = null;
 
   @action.bound
   public async init() {
     const data = await getData();
 
     runInAction(() => {
-      this.data = data;
+      this.allCases = data;
 
-      const countries = Object.keys(this.data.countries);
+      const countries = Object.keys(this.allCases.countries);
       this.countries = countries;
 
       const colors = randomcolor({
@@ -46,19 +46,19 @@ export default class RootStore {
   public setCountriesToCompare(countriesToCompare?: string[]) {
     if (countriesToCompare) {
       const dataForSelectedCountries: Timeseries = {
-        dates: [...this.data.dates],
+        dates: [...this.allCases.dates],
         countries: {},
       };
 
       for (const country of countriesToCompare) {
         dataForSelectedCountries.countries[country] = [
-          ...this.data.countries[country],
+          ...this.allCases.countries[country],
         ];
       }
 
-      this.dataForSelectedCountries = dataForSelectedCountries;
+      this.selectedCountriesCases = dataForSelectedCountries;
     } else {
-      this.dataForSelectedCountries = null;
+      this.selectedCountriesCases = null;
     }
   }
 }
