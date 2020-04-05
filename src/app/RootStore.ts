@@ -22,12 +22,13 @@ export default class RootStore {
   @action.bound
   public async init() {
     const dataStore = new DataStore();
-    await dataStore.getData();
+    const data = await dataStore.getData();
 
     runInAction(() => {
-      const countries = Object.keys(dataStore.data.countries);
+      this.data = data;
+
+      const countries = Object.keys(this.data.countries);
       this.countries = countries;
-      this.data = dataStore.data;
 
       const colors = randomcolor({
         count: countries.length,
@@ -35,9 +36,13 @@ export default class RootStore {
         hue: 'random',
       });
 
+      const countryColors: Record<string, string> = {};
+
       for (let i = 0; i < countries.length; i++) {
-        this.countryColors[countries[i]] = colors[i];
+        countryColors[countries[i]] = colors[i];
       }
+
+      this.countryColors = countryColors;
     });
   }
 
