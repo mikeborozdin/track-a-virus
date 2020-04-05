@@ -2,10 +2,13 @@ import Papa from 'papaparse';
 import { Timeseries } from '../Timeseries';
 import parseDate from './parse-date';
 
-const NON_US_DATA_URL =
+const NON_US_CASES_DATA_URL =
   'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv';
 
-const US_DATA_URL =
+const NON_US_DEATHS_DATA_URL =
+  'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv';
+
+const US_CASES_DATA_URL =
   'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_US.csv';
 
 const US_COUNTRY_NAME = 'United States';
@@ -46,7 +49,19 @@ const processNonUsData = (results: Papa.ParseResult) => {
 
 const getNonUsData = async (): Promise<Timeseries> => {
   return new Promise<Timeseries>((resolve) => {
-    Papa.parse(NON_US_DATA_URL, {
+    Papa.parse(NON_US_CASES_DATA_URL, {
+      download: true,
+      header: true,
+      complete: (results: Papa.ParseResult) => {
+        resolve(processNonUsData(results));
+      },
+    });
+  });
+};
+
+const getNonUsDeaths = async (): Promise<Timeseries> => {
+  return new Promise<Timeseries>((resolve) => {
+    Papa.parse(NON_US_DEATHS_DATA_URL, {
       download: true,
       header: true,
       complete: (results: Papa.ParseResult) => {
@@ -84,7 +99,7 @@ const processUsData = (results: Papa.ParseResult) => {
 
 const getUsData = (): Promise<number[]> => {
   return new Promise((resolve) => {
-    Papa.parse(US_DATA_URL, {
+    Papa.parse(US_CASES_DATA_URL, {
       download: true,
       header: true,
       complete: (results: Papa.ParseResult) => {
@@ -98,6 +113,12 @@ const getData = async () => {
   const timeseries = await getNonUsData();
 
   timeseries.countries[US_COUNTRY_NAME] = await getUsData();
+
+  return timeseries;
+};
+
+export const getDeaths = async () => {
+  const timeseries = await getNonUsDeaths();
 
   return timeseries;
 };

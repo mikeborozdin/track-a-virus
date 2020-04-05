@@ -68,6 +68,29 @@ const App: React.FC<Props> = ({ rootStore }) => {
               </div>
             </>
           )}
+
+          {rootStore.selectedCountriesDeaths && (
+            <>
+              <div>
+                <DailyCases
+                  data={rootStore.selectedCountriesDeaths}
+                  countryColors={rootStore.countryColors}
+                />
+              </div>
+              <div>
+                <DailyIncrease
+                  data={rootStore.selectedCountriesDeaths}
+                  countryColors={rootStore.countryColors}
+                />
+              </div>
+              <div>
+                <DailyIncreasePercentage
+                  data={rootStore.selectedCountriesDeaths}
+                  countryColors={rootStore.countryColors}
+                />
+              </div>
+            </>
+          )}
         </>
       )}
     </div>

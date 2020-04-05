@@ -1,7 +1,7 @@
 import { observable, runInAction, action } from 'mobx';
 import randomcolor from 'randomcolor';
 import { Timeseries } from './Timeseries';
-import getData from './data/get-data';
+import getData, { getDeaths } from './data/get-data';
 
 export default class RootStore {
   @observable
@@ -14,14 +14,22 @@ export default class RootStore {
   public allCases: Timeseries;
 
   @observable
+  public allDeaths: Timeseries;
+
+  @observable
   public selectedCountriesCases: Timeseries = null;
+
+  @observable
+  public selectedCountriesDeaths: Timeseries = null;
 
   @action.bound
   public async init() {
-    const data = await getData();
+    const cases = await getData();
+    const deaths = await getDeaths();
 
     runInAction(() => {
-      this.allCases = data;
+      this.allCases = cases;
+      this.allDeaths = deaths;
 
       const countries = Object.keys(this.allCases.countries);
       this.countries = countries;
@@ -45,21 +53,34 @@ export default class RootStore {
   @action.bound
   public setCountriesToCompare(countriesToCompare?: string[]) {
     if (countriesToCompare) {
-      const dataForSelectedCountries: Timeseries = {
-        dates: [...this.allCases.dates],
-        countries: {},
-      };
+      this.selectedCountriesCases = this.filterCountries(
+        this.allCases,
+        countriesToCompare
+      );
 
-      for (const country of countriesToCompare) {
-        dataForSelectedCountries.countries[country] = [
-          ...this.allCases.countries[country],
-        ];
-      }
-
-      this.selectedCountriesCases = dataForSelectedCountries;
+      this.selectedCountriesDeaths = this.filterCountries(
+        this.allDeaths,
+        countriesToCompare
+      );
     } else {
       this.selectedCountriesCases = null;
+      this.selectedCountriesDeaths = null;
     }
+  }
+
+  private filterCountries(data: Timeseries, countries: string[]) {
+    const dataForSelectedCountries: Timeseries = {
+      dates: [...data.dates],
+      countries: {},
+    };
+
+    for (const country of countries) {
+      dataForSelectedCountries.countries[country] = [
+        ...data.countries[country],
+      ];
+    }
+
+    return dataForSelectedCountries;
   }
 }
 
