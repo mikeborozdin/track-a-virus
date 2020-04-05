@@ -1,8 +1,19 @@
 .col2 {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: none;
 }
 
 .span2 {
-  grid-column: 1 / span 2;
+  grid-column: 1;
+}
+
+@media only screen and (min-width: 800px) {
+  .col2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .span2 {
+    grid-column: 1 / span 2;
+  }
 }
