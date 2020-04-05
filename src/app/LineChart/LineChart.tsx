@@ -60,6 +60,14 @@ const LineChart: FC<Props> = ({ data, countryColors }) => {
                     },
                   },
                 ],
+                yAxes: [
+                  {
+                    ticks: {
+                      callback: (value) =>
+                        parseInt(value.toString()).toLocaleString('en-gb'),
+                    },
+                  },
+                ],
               },
             },
           })
