@@ -5,9 +5,6 @@ import { Timeseries } from './Timeseries';
 
 export default class RootStore {
   @observable
-  public finishedProcessing = false;
-
-  @observable
   public countries: string[] = null;
 
   @observable
