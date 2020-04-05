@@ -17,6 +17,9 @@ export default class RootStore {
   public allDeaths: Timeseries;
 
   @observable
+  public aggregatedGlobalCases: Timeseries;
+
+  @observable
   public selectedCountriesCases: Timeseries = null;
 
   @observable
@@ -30,6 +33,7 @@ export default class RootStore {
     runInAction(() => {
       this.allCases = cases;
       this.allDeaths = deaths;
+      this.aggregatedGlobalCases = this.getAggregatedGlobalCases(cases);
 
       const countries = Object.keys(this.allCases.countries);
       this.countries = countries;
@@ -81,6 +85,24 @@ export default class RootStore {
     }
 
     return dataForSelectedCountries;
+  }
+
+  @action
+  private getAggregatedGlobalCases(allCases: Timeseries) {
+    const global: Timeseries = {
+      dates: [...allCases.dates],
+      countries: { global: [] },
+    };
+
+    global.countries.global = global.dates.map((_date, dateIndex) =>
+      Object.values(allCases.countries).reduce(
+        (totalOnDate, currentCountry) =>
+          totalOnDate + currentCountry[dateIndex],
+        0
+      )
+    );
+
+    return global;
   }
 }
 

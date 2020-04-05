@@ -39,6 +39,12 @@ const App: React.FC<Props> = ({ rootStore }) => {
           <div className={styles.span2}>
             <h1>Covid-19 Dashboard</h1>
           </div>
+          <div>
+            <DailyCases
+              data={rootStore.aggregatedGlobalCases}
+              countryColors={{ global: 'red' }}
+            />
+          </div>
           <div className={styles.span2}>
             <Select
               options={getCountrySelectOptions(rootStore.countries)}

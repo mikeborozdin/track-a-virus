@@ -16,8 +16,18 @@ const US_DEATHS_DATA_URL =
 
 const US_COUNTRY_NAME = 'United States';
 
+const NON_US_COUNTRY_FIELD = 'Country/Region';
+
+const COUNTRIES_TO_EXCLUDE_FROM_NON_US = ['US'];
+
 const processNonUsData = (results: Papa.ParseResult) => {
-  const rawData = results.data;
+  const rawData = results.data
+    .filter((row) => row[NON_US_COUNTRY_FIELD])
+    .filter(
+      (row) =>
+        !COUNTRIES_TO_EXCLUDE_FROM_NON_US.includes(row[NON_US_COUNTRY_FIELD])
+    );
+
   const datesStartsFromIndex = 4;
   const dates = Object.keys(rawData[0])
     .slice(datesStartsFromIndex)
@@ -30,7 +40,7 @@ const processNonUsData = (results: Papa.ParseResult) => {
 
   for (let countryIndex = 0; countryIndex < rawData.length; countryIndex++) {
     const rawCountryData = rawData[countryIndex];
-    const countryName = rawCountryData['Country/Region'];
+    const countryName = rawCountryData[NON_US_COUNTRY_FIELD];
 
     if (timeseries.countries[countryName]) {
       timeseries.countries[countryName] = Object.keys(rawCountryData)
@@ -78,7 +88,7 @@ const processUsData = (
   results: Papa.ParseResult,
   datesStartsFromIndex: number
 ) => {
-  const rawData = results.data;
+  const rawData = results.data.filter((row) => row['UID']);
 
   let usValues: number[] = [];
 
