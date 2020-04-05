@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import LineChart from '../LineChart/LineChart';
 import { Timeseries } from '../Timeseries';
 import calculateDailyIncreasePercentage from './calculate-daily-increase-percentage';
+import BarChart from '../BarChart/BarChart';
 
 interface Props {
   data: Timeseries;
@@ -40,10 +41,12 @@ const getChartOptions = (): Chart.ChartOptions => ({
 });
 
 const DailyIncrease: FC<Props> = ({ data, countryColors }) => {
+  const Chart = Object.keys(data.countries).length > 1 ? LineChart : BarChart;
+
   return (
     <>
       <div>Daily increase %</div>
-      <LineChart
+      <Chart
         data={calculateDailyIncreasePercentage(data)}
         countryColors={countryColors}
         chartOptions={getChartOptions()}
