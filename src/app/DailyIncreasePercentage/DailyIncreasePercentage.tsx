@@ -8,6 +8,37 @@ interface Props {
   countryColors: Record<string, string>;
 }
 
+const getChartOptions = (): Chart.ChartOptions => ({
+  scales: {
+    xAxes: [
+      {
+        type: 'time',
+        time: {
+          unit: 'day',
+        },
+      },
+    ],
+    yAxes: [
+      {
+        ticks: {
+          callback: (value) =>
+            `${(parseFloat(value.toString()) * 100).toLocaleString('en-gb')}%`,
+        },
+      },
+    ],
+  },
+  tooltips: {
+    callbacks: {
+      title: (item) =>
+        item[0].label.substring(0, item[0].label.lastIndexOf(', ')),
+      label: (item, data) =>
+        `${data.datasets[item.datasetIndex].label}: ${(
+          parseFloat(item.value) * 100
+        ).toLocaleString('en-gb')}%`,
+    },
+  },
+});
+
 const DailyIncrease: FC<Props> = ({ data, countryColors }) => {
   return (
     <>
@@ -15,6 +46,7 @@ const DailyIncrease: FC<Props> = ({ data, countryColors }) => {
       <LineChart
         data={calculateDailyIncreasePercentage(data)}
         countryColors={countryColors}
+        chartOptions={getChartOptions()}
       />
     </>
   );

@@ -1,10 +1,11 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
-import Chart from 'chart.js';
+import Chart, { ChartOptions } from 'chart.js';
 import { Timeseries } from '../Timeseries';
 
 interface Props {
   data: Timeseries;
   countryColors: Record<string, string>;
+  chartOptions?: ChartOptions;
 }
 
 const getCountryDataForChartJs = (
@@ -24,7 +25,38 @@ const getCountryDataForChartJs = (
   return chartDatasets;
 };
 
-const LineChart: FC<Props> = ({ data, countryColors }) => {
+const getChartOptions = (): Chart.ChartOptions => ({
+  scales: {
+    xAxes: [
+      {
+        type: 'time',
+        time: {
+          unit: 'day',
+        },
+      },
+    ],
+    yAxes: [
+      {
+        ticks: {
+          callback: (value) =>
+            parseInt(value.toString()).toLocaleString('en-gb'),
+        },
+      },
+    ],
+  },
+  tooltips: {
+    callbacks: {
+      title: (item) =>
+        item[0].label.substring(0, item[0].label.lastIndexOf(', ')),
+      label: (item, data) =>
+        `${data.datasets[item.datasetIndex].label}: ${parseInt(
+          item.value
+        ).toLocaleString('en-gb')}`,
+    },
+  },
+});
+
+const LineChart: FC<Props> = ({ data, countryColors, chartOptions }) => {
   const [chart, setChart] = useState<Chart>(null);
   const chartRef = useRef(null);
 
@@ -39,36 +71,7 @@ const LineChart: FC<Props> = ({ data, countryColors }) => {
               labels: data.dates,
               datasets: getCountryDataForChartJs(data, countryColors),
             },
-            options: {
-              scales: {
-                xAxes: [
-                  {
-                    type: 'time',
-                    time: {
-                      unit: 'day',
-                    },
-                  },
-                ],
-                yAxes: [
-                  {
-                    ticks: {
-                      callback: (value) =>
-                        parseInt(value.toString()).toLocaleString('en-gb'),
-                    },
-                  },
-                ],
-              },
-              tooltips: {
-                callbacks: {
-                  title: (item) =>
-                    item[0].label.substring(0, item[0].label.lastIndexOf(', ')),
-                  label: (item, data) =>
-                    `${data.datasets[item.datasetIndex].label}: ${parseInt(
-                      item.value
-                    ).toLocaleString('en-gb')}`,
-                },
-              },
-            },
+            options: { ...getChartOptions(), ...chartOptions },
           })
         );
       } else {
