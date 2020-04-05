@@ -7,13 +7,13 @@ interface Props {
   countryColors: Record<string, string>;
 }
 
-const CountryComparison: FC<Props> = ({ data, countryColors }) => {
+const DailyCases: FC<Props> = ({ data, countryColors }) => {
   return (
     <>
-      <div>Number of daily cases</div>
+      <div>Number of cases</div>
       <LineChart data={data} countryColors={countryColors} />
     </>
   );
 };
 
-export default CountryComparison;
+export default DailyCases;

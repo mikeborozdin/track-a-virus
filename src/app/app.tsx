@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import CountryComparison from './CountryComparison/CountryComparison';
+import DailyCases from './DailyCases/DailyCases';
 import styles from './app.css';
 import DailyIncrease from './DailyIncrease/DailyIncrease';
 import DailyIncreasePercentage from './DailyIncreasePercentage/DailyIncreasePercentage';
@@ -49,7 +49,7 @@ const App: React.FC<Props> = ({ rootStore }) => {
           {rootStore.dataForSelectedCountries && (
             <>
               <div>
-                <CountryComparison
+                <DailyCases
                   data={rootStore.dataForSelectedCountries}
                   countryColors={rootStore.countryColors}
                 />
