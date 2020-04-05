@@ -1,7 +1,7 @@
 import { observable, runInAction, action } from 'mobx';
 import randomcolor from 'randomcolor';
-import DataStore from './DataStore';
 import { Timeseries } from './Timeseries';
+import getData from './get-data';
 
 export default class RootStore {
   @observable
@@ -18,8 +18,7 @@ export default class RootStore {
 
   @action.bound
   public async init() {
-    const dataStore = new DataStore();
-    const data = await dataStore.getData();
+    const data = await getData();
 
     runInAction(() => {
       this.data = data;
