@@ -69,6 +69,16 @@ const LineChart: FC<Props> = ({ data, countryColors }) => {
                   },
                 ],
               },
+              tooltips: {
+                callbacks: {
+                  title: (item) =>
+                    item[0].label.substring(0, item[0].label.lastIndexOf(', ')),
+                  label: (item, data) =>
+                    `${data.datasets[item.datasetIndex].label}: ${parseInt(
+                      item.value
+                    ).toLocaleString('en-gb')}`,
+                },
+              },
             },
           })
         );
