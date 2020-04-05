@@ -33,10 +33,10 @@ const App: React.FC<Props> = ({ rootStore }) => {
   }, [countriesToCompare]);
 
   return (
-    <div className={styles.dashboard}>
+    <div className={styles.col2}>
       {rootStore.countries && (
         <>
-          <div className={styles.countrySelector}>
+          <div className={styles.span2}>
             <Select
               options={getCountrySelectOptions(rootStore.countries)}
               isMulti
@@ -48,6 +48,9 @@ const App: React.FC<Props> = ({ rootStore }) => {
           </div>
           {rootStore.selectedCountriesCases && (
             <>
+              <div className={styles.span2}>
+                <h1>Confirmed cases</h1>
+              </div>
               <div>
                 <DailyCases
                   data={rootStore.selectedCountriesCases}
@@ -71,6 +74,9 @@ const App: React.FC<Props> = ({ rootStore }) => {
 
           {rootStore.selectedCountriesDeaths && (
             <>
+              <div className={styles.span2}>
+                <h1>Confirmed deaths</h1>
+              </div>
               <div>
                 <DailyCases
                   data={rootStore.selectedCountriesDeaths}

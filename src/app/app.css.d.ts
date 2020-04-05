@@ -1,6 +1,6 @@
 export interface IAppCss {
-  countrySelector: string;
-  dashboard: string;
+  col2: string;
+  span2: string;
 }
 
 export const locals: IAppCss;

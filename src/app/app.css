@@ -1,8 +1,8 @@
-.dashboard {
+.col2 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 }
 
-.countrySelector {
+.span2 {
   grid-column: 1 / span 2;
 }
