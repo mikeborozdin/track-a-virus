@@ -11,6 +11,9 @@ const NON_US_DEATHS_DATA_URL =
 const US_CASES_DATA_URL =
   'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_US.csv';
 
+const US_DEATHS_DATA_URL =
+  'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_US.csv';
+
 const US_COUNTRY_NAME = 'United States';
 
 const processNonUsData = (results: Papa.ParseResult) => {
@@ -71,9 +74,11 @@ const getNonUsDeaths = async (): Promise<Timeseries> => {
   });
 };
 
-const processUsData = (results: Papa.ParseResult) => {
+const processUsData = (
+  results: Papa.ParseResult,
+  datesStartsFromIndex: number
+) => {
   const rawData = results.data;
-  const datesStartsFromIndex = 11;
 
   let usValues: number[] = [];
 
@@ -103,7 +108,19 @@ const getUsData = (): Promise<number[]> => {
       download: true,
       header: true,
       complete: (results: Papa.ParseResult) => {
-        resolve(processUsData(results));
+        resolve(processUsData(results, 11));
+      },
+    });
+  });
+};
+
+const getUsDeaths = async (): Promise<number[]> => {
+  return new Promise<number[]>((resolve) => {
+    Papa.parse(US_DEATHS_DATA_URL, {
+      download: true,
+      header: true,
+      complete: (results: Papa.ParseResult) => {
+        resolve(processUsData(results, 12));
       },
     });
   });
@@ -119,6 +136,8 @@ const getData = async () => {
 
 export const getDeaths = async () => {
   const timeseries = await getNonUsDeaths();
+
+  timeseries.countries[US_COUNTRY_NAME] = await getUsDeaths();
 
   return timeseries;
 };
