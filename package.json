@@ -1,15 +1,14 @@
 {
-  "name": "flattenthecurve-web",
+  "name": "trackavirus-web",
   "version": "1.0.0",
   "description": "",
   "scripts": {
     "start": "webpack-dev-server --config ./webpack.config.js --mode development --env=dev",
-    "test": "jest",
     "lint": "tsc --noEmit && eslint './src/**/*.{ts,tsx}'",
     "build": "npm run pre-build-checks && webpack --mode=production --env=production",
     "deploy": "npm run build && rm ../dist/* && cp ./dist/* ../dist && cd ../dist && git add . && git commit -am 'release' && git push && cd ../ui",
     "prettier": "prettier ./src -c",
-    "pre-build-checks": "npm test && npm run lint && npm run prettier"
+    "pre-build-checks": "npm run lint && npm run prettier"
   },
   "keywords": [],
   "author": "",
@@ -29,7 +28,6 @@
     "@types/react": "^16.8.14",
     "@types/react-dom": "^16.8.4",
     "@types/react-select": "^3.0.4",
-    "@types/recharts": "^1.8.9",
     "@types/webpack-env": "^1.13.9",
     "@typescript-eslint/eslint-plugin": "^2.25.0",
     "@typescript-eslint/parser": "^2.25.0",
@@ -66,7 +64,6 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-number-format": "^4.3.1",
-    "react-select": "^3.1.0",
-    "recharts": "^1.8.5"
+    "react-select": "^3.1.0"
   }
 }
