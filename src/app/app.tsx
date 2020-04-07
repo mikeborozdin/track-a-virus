@@ -103,7 +103,11 @@ const App: React.FC<Props> = ({ rootStore }) => {
           </div> */}
 
           <div className={styles['span-all-col']}>
+            <label htmlFor='countrySelector'>
+              Select a country or a few to dive in & compare
+            </label>
             <Select
+              inputId='countrySelector'
               options={getCountrySelectOptions(rootStore.countries)}
               isMulti
               value={countriesToCompare}
