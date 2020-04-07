@@ -33,11 +33,18 @@ export default class RootStore {
     const cases = await getCases();
     const deaths = await getDeaths();
 
+    cases.countries.World = this.getAggregatedGlobalData(
+      cases
+    ).countries.global;
+    deaths.countries.World = this.getAggregatedGlobalData(
+      deaths
+    ).countries.global;
+
     runInAction(() => {
       this.allCases = cases;
       this.allDeaths = deaths;
-      this.aggregatedGlobalCases = this.getAggregatedGlobalData(cases);
-      this.aggregatedGlobalDeaths = this.getAggregatedGlobalData(deaths);
+      // this.aggregatedGlobalCases = this.getAggregatedGlobalData(cases);
+      // this.aggregatedGlobalDeaths = this.getAggregatedGlobalData(deaths);
 
       const countries = Object.keys(this.allCases.countries);
       this.countries = countries;

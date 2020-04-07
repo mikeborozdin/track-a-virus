@@ -20,17 +20,29 @@ interface SelectOption {
 }
 
 const App: React.FC<Props> = ({ rootStore }) => {
-  const [countriesToCompare, setCountriesToCompare] = useState<SelectOption[]>(
-    null
-  );
+  // const [countriesToCompare, setCountriesToCompare] = useState<SelectOption[]>([
+  //   {
+  //     value: 'World',
+  //     label: 'World',
+  //   },
+  // ]);
+
+  const [countriesToCompare, setCountriesToCompare] = useState<SelectOption[]>([
+    {
+      value: 'World',
+      label: 'World',
+    },
+  ]);
 
   useEffect(() => {
     rootStore.init();
   }, []);
 
   useEffect(() => {
-    rootStore.setCountriesToCompare(countriesToCompare?.map((c) => c.value));
-  }, [countriesToCompare]);
+    rootStore.allCases &&
+      rootStore.allDeaths &&
+      rootStore.setCountriesToCompare(countriesToCompare?.map((c) => c.value));
+  }, [countriesToCompare, rootStore.allCases, rootStore.allDeaths]);
 
   return (
     <div
@@ -40,13 +52,13 @@ const App: React.FC<Props> = ({ rootStore }) => {
         ${styles['col3-1024px']}
       `}
     >
-      {rootStore.countries && (
+      {rootStore.allCases && rootStore.allDeaths && (
         <>
           <div className={styles['span-all-col']}>
             <h1>Covid-19 Dashboard</h1>
           </div>
 
-          <div className={styles['span-all-col']}>
+          {/* <div className={styles['span-all-col']}>
             <h1>Worldwide - confirmed cases</h1>
           </div>
           <div>
@@ -88,11 +100,7 @@ const App: React.FC<Props> = ({ rootStore }) => {
               data={rootStore.aggregatedGlobalDeaths}
               countryColors={{ global: 'red' }}
             />
-          </div>
-
-          <div className={styles['span-all-col']}>
-            <h1>Data by country & country comparison</h1>
-          </div>
+          </div> */}
 
           <div className={styles['span-all-col']}>
             <Select
@@ -102,7 +110,7 @@ const App: React.FC<Props> = ({ rootStore }) => {
               onChange={(selected) => {
                 setCountriesToCompare(selected as SelectOption[]);
               }}
-              placeholder='Select countries to compare'
+              placeholder="Select countries to compare. Type 'World' for the worldwide data"
             />
           </div>
           {rootStore.selectedCountriesCases && (
