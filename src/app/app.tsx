@@ -45,12 +45,51 @@ const App: React.FC<Props> = ({ rootStore }) => {
           <div className={styles['span-all-col']}>
             <h1>Covid-19 Dashboard</h1>
           </div>
+
+          <div className={styles['span-all-col']}>
+            <h1>Worldwide - confirmed cases</h1>
+          </div>
           <div>
             <DailyCases
               data={rootStore.aggregatedGlobalCases}
               countryColors={{ global: 'red' }}
             />
           </div>
+          <div>
+            <DailyIncrease
+              data={rootStore.aggregatedGlobalCases}
+              countryColors={{ global: 'red' }}
+            />
+          </div>
+          <div>
+            <DailyIncreasePercentage
+              data={rootStore.aggregatedGlobalCases}
+              countryColors={{ global: 'red' }}
+            />
+          </div>
+
+          <div className={styles['span-all-col']}>
+            <h1>Worldwide - confirmed deaths</h1>
+          </div>
+          <div>
+            <DailyCases
+              data={rootStore.aggregatedGlobalDeaths}
+              countryColors={{ global: 'red' }}
+            />
+          </div>
+          <div>
+            <DailyIncrease
+              data={rootStore.aggregatedGlobalDeaths}
+              countryColors={{ global: 'red' }}
+            />
+          </div>
+          <div>
+            <DailyIncreasePercentage
+              data={rootStore.aggregatedGlobalDeaths}
+              countryColors={{ global: 'red' }}
+            />
+          </div>
+
           <div className={styles['span-all-col']}>
             <Select
               options={getCountrySelectOptions(rootStore.countries)}
