@@ -1,5 +1,6 @@
 body {
   font-family: Helvetica;
+  font-size: 16px;
 }
 
 .col1-320px {
@@ -12,7 +13,36 @@ body {
   grid-column: 1 / -1;
 }
 
+.logo > h1 {
+  font-size: 1rem;
+}
+
+.logo > * {
+  margin: 0;
+}
+
+.logo > p {
+  font-style: italic;
+}
+
+.logo > * > img {
+  height: 1rem;
+  margin-right: 0.5rem;
+}
+
 @media only screen and (min-width: 768px) {
+  body {
+    font-size: 18px;
+  }
+
+  .logo > h1 {
+    font-size: 1.5rem;
+  }
+
+  .logo > * > img {
+    height: 1.5rem;
+  }
+
   .col2-768px {
     grid-template-columns: repeat(2, 1fr);
     grid-column-gap: 3%;
@@ -20,6 +50,14 @@ body {
 }
 
 @media only screen and (min-width: 1024px) {
+  .logo > h1 {
+    font-size: 2rem;
+  }
+
+  .logo > * > img {
+    height: 2rem;
+  }
+
   .col3-1024px {
     grid-template-columns: repeat(3, 1fr);
     grid-column-gap: 3%;

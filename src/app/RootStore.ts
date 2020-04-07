@@ -1,4 +1,4 @@
-import { observable, runInAction, action } from 'mobx';
+import { observable, runInAction, action, computed } from 'mobx';
 import randomcolor from 'randomcolor';
 import { Timeseries } from './Timeseries';
 import getCases, { getDeaths } from './data/get-data';
@@ -27,6 +27,11 @@ export default class RootStore {
 
   @observable
   public aggregatedGlobalDeaths: Timeseries = null;
+
+  @computed
+  get dateUpdated() {
+    return this.allCases.dates[this.allCases.dates.length - 1];
+  }
 
   @action.bound
   public async init() {

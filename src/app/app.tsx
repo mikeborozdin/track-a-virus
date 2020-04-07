@@ -6,6 +6,7 @@ import DailyIncreasePercentage from './DailyIncreasePercentage/DailyIncreasePerc
 import RootStore, { AllStores } from './RootStore';
 import { observer, inject } from 'mobx-react';
 import Select from 'react-select';
+import icon from './icon.png';
 
 interface Props {
   rootStore?: RootStore;
@@ -20,13 +21,6 @@ interface SelectOption {
 }
 
 const App: React.FC<Props> = ({ rootStore }) => {
-  // const [countriesToCompare, setCountriesToCompare] = useState<SelectOption[]>([
-  //   {
-  //     value: 'World',
-  //     label: 'World',
-  //   },
-  // ]);
-
   const [countriesToCompare, setCountriesToCompare] = useState<SelectOption[]>([
     {
       value: 'World',
@@ -54,8 +48,12 @@ const App: React.FC<Props> = ({ rootStore }) => {
     >
       {rootStore.allCases && rootStore.allDeaths && (
         <>
-          <div className={styles['span-all-col']}>
-            <h1>Covid-19 Dashboard</h1>
+          <div className={`${styles['span-all-col']} ${styles['logo']}`}>
+            <h1>
+              <img src={icon} />
+              Track a Virus: Covid-19 Dashboard
+            </h1>
+            <p>(data updated on {rootStore.dateUpdated.toDateString()})</p>
           </div>
 
           {/* <div className={styles['span-all-col']}>
