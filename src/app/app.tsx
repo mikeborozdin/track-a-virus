@@ -91,6 +91,10 @@ const App: React.FC<Props> = ({ rootStore }) => {
           </div>
 
           <div className={styles['span-all-col']}>
+            <h1>Data by country & country comparison</h1>
+          </div>
+
+          <div className={styles['span-all-col']}>
             <Select
               options={getCountrySelectOptions(rootStore.countries)}
               isMulti
