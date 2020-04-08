@@ -23,8 +23,8 @@ interface SelectOption {
 const App: React.FC<Props> = ({ dashboardStore }) => {
   const [countriesToCompare, setCountriesToCompare] = useState<SelectOption[]>([
     {
-      value: 'World',
-      label: 'World',
+      value: dashboardStore.WORLD_NAME,
+      label: dashboardStore.WORLD_NAME,
     },
   ]);
 

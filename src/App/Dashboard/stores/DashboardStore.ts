@@ -1,9 +1,11 @@
 import { observable, runInAction, action, computed } from 'mobx';
-import randomcolor from 'randomcolor';
 import { Timeseries } from '../Timeseries';
-import getCases, { getDeaths } from './data/get-data';
+import { getCases, getDeaths, WORLD_NAME } from './data/get-data';
+import getRandomCountryColors from './get-random-colors';
 
 export default class DashboardStore {
+  public WORLD_NAME = WORLD_NAME;
+
   @observable
   public countries: string[] = null;
 
@@ -17,16 +19,10 @@ export default class DashboardStore {
   public allDeaths: Timeseries;
 
   @observable
-  public aggregatedGlobalCases: Timeseries;
-
-  @observable
   public selectedCountriesCases: Timeseries = null;
 
   @observable
   public selectedCountriesDeaths: Timeseries = null;
-
-  @observable
-  public aggregatedGlobalDeaths: Timeseries = null;
 
   @computed
   get dateUpdated() {
@@ -38,33 +34,13 @@ export default class DashboardStore {
     const cases = await getCases();
     const deaths = await getDeaths();
 
-    cases.countries.World = this.getAggregatedGlobalData(
-      cases
-    ).countries.global;
-    deaths.countries.World = this.getAggregatedGlobalData(
-      deaths
-    ).countries.global;
-
     runInAction(() => {
       this.allCases = cases;
       this.allDeaths = deaths;
 
       const countries = Object.keys(this.allCases.countries);
       this.countries = countries;
-
-      const colors = randomcolor({
-        count: countries.length,
-        luminosity: 'bright',
-        hue: 'random',
-      });
-
-      const countryColors: Record<string, string> = {};
-
-      for (let i = 0; i < countries.length; i++) {
-        countryColors[countries[i]] = colors[i];
-      }
-
-      this.countryColors = countryColors;
+      this.countryColors = getRandomCountryColors(countries);
     });
   }
 
@@ -99,23 +75,5 @@ export default class DashboardStore {
     }
 
     return dataForSelectedCountries;
-  }
-
-  @action
-  private getAggregatedGlobalData(globalData: Timeseries) {
-    const global: Timeseries = {
-      dates: [...globalData.dates],
-      countries: { global: [] },
-    };
-
-    global.countries.global = global.dates.map((_date, dateIndex) =>
-      Object.values(globalData.countries).reduce(
-        (totalOnDate, currentCountry) =>
-          totalOnDate + currentCountry[dateIndex],
-        0
-      )
-    );
-
-    return global;
   }
 }

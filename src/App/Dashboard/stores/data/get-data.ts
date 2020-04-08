@@ -1,5 +1,5 @@
 import Papa from 'papaparse';
-import { Timeseries } from '../../Timeseries';
+import { Timeseries, CountryDailyData } from '../../Timeseries';
 import parseDate from './parse-date';
 
 const NON_US_CASES_DATA_URL =
@@ -19,6 +19,8 @@ const US_COUNTRY_NAME = 'United States';
 const NON_US_COUNTRY_FIELD = 'Country/Region';
 
 const COUNTRIES_TO_EXCLUDE_FROM_NON_US = ['US'];
+
+const WORLD_NAME = 'World';
 
 const processNonUsData = (results: Papa.ParseResult) => {
   const rawData = results.data
@@ -136,20 +138,31 @@ const getUsDeaths = async (): Promise<number[]> => {
   });
 };
 
+const getAggregatedGlobalData = (globalData: Timeseries) => {
+  return globalData.dates.map((_date, dateIndex) =>
+    Object.values(globalData.countries).reduce(
+      (totalOnDate, currentCountry) => totalOnDate + currentCountry[dateIndex],
+      0
+    )
+  );
+};
+
 const getCases = async () => {
   const timeseries = await getNonUsData();
 
   timeseries.countries[US_COUNTRY_NAME] = await getUsData();
+  timeseries.countries[WORLD_NAME] = getAggregatedGlobalData(timeseries);
 
   return timeseries;
 };
 
-export const getDeaths = async () => {
+const getDeaths = async () => {
   const timeseries = await getNonUsDeaths();
 
   timeseries.countries[US_COUNTRY_NAME] = await getUsDeaths();
+  timeseries.countries[WORLD_NAME] = getAggregatedGlobalData(timeseries);
 
   return timeseries;
 };
 
-export default getCases;
+export { WORLD_NAME, getCases, getDeaths };
