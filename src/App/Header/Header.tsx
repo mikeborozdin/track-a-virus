@@ -16,7 +16,7 @@ const Header: FC = () => {
           </a>
         </div>
         <div>
-          <a href='/'>Covid-19 Dashboard</a>
+          <a href='/'>COVID-19 Dashboard</a>
         </div>
       </div>
 
