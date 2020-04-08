@@ -21,6 +21,58 @@ interface SelectOption {
   label: string;
 }
 
+const renderCasesForSelectedCountries = (dashboardStore: DashboardStore) => (
+  <>
+    <div className={styles['span-all-col']}>
+      <h1>Confirmed cases</h1>
+    </div>
+    <div>
+      <DailyCases
+        data={dashboardStore.selectedCountriesCases}
+        countryColors={dashboardStore.countryColors}
+      />
+    </div>
+    <div>
+      <DailyIncrease
+        data={dashboardStore.selectedCountriesCases}
+        countryColors={dashboardStore.countryColors}
+      />
+    </div>
+    <div>
+      <DailyIncreasePercentage
+        data={dashboardStore.selectedCountriesCases}
+        countryColors={dashboardStore.countryColors}
+      />
+    </div>
+  </>
+);
+
+const renderDeathsForSelectedCountries = (dashboardStore: DashboardStore) => (
+  <>
+    <div className={styles['span-all-col']}>
+      <h1>Confirmed deaths</h1>
+    </div>
+    <div>
+      <DailyCases
+        data={dashboardStore.selectedCountriesDeaths}
+        countryColors={dashboardStore.countryColors}
+      />
+    </div>
+    <div>
+      <DailyIncrease
+        data={dashboardStore.selectedCountriesDeaths}
+        countryColors={dashboardStore.countryColors}
+      />
+    </div>
+    <div>
+      <DailyIncreasePercentage
+        data={dashboardStore.selectedCountriesDeaths}
+        countryColors={dashboardStore.countryColors}
+      />
+    </div>
+  </>
+);
+
 const renderDashboard = (
   dashboardStore: DashboardStore,
   countriesToCompare: SelectOption[],
@@ -56,57 +108,11 @@ const renderDashboard = (
         placeholder="Select countries to compare. Type 'World' for the worldwide data"
       />
     </div>
-    {dashboardStore.selectedCountriesCases && (
-      <>
-        <div className={styles['span-all-col']}>
-          <h1>Confirmed cases</h1>
-        </div>
-        <div>
-          <DailyCases
-            data={dashboardStore.selectedCountriesCases}
-            countryColors={dashboardStore.countryColors}
-          />
-        </div>
-        <div>
-          <DailyIncrease
-            data={dashboardStore.selectedCountriesCases}
-            countryColors={dashboardStore.countryColors}
-          />
-        </div>
-        <div>
-          <DailyIncreasePercentage
-            data={dashboardStore.selectedCountriesCases}
-            countryColors={dashboardStore.countryColors}
-          />
-        </div>
-      </>
-    )}
+    {dashboardStore.selectedCountriesCases &&
+      renderCasesForSelectedCountries(dashboardStore)}
 
-    {dashboardStore.selectedCountriesDeaths && (
-      <>
-        <div className={styles['span-all-col']}>
-          <h1>Confirmed deaths</h1>
-        </div>
-        <div>
-          <DailyCases
-            data={dashboardStore.selectedCountriesDeaths}
-            countryColors={dashboardStore.countryColors}
-          />
-        </div>
-        <div>
-          <DailyIncrease
-            data={dashboardStore.selectedCountriesDeaths}
-            countryColors={dashboardStore.countryColors}
-          />
-        </div>
-        <div>
-          <DailyIncreasePercentage
-            data={dashboardStore.selectedCountriesDeaths}
-            countryColors={dashboardStore.countryColors}
-          />
-        </div>
-      </>
-    )}
+    {dashboardStore.selectedCountriesDeaths &&
+      renderDeathsForSelectedCountries(dashboardStore)}
   </>
 );
 
@@ -146,12 +152,6 @@ const App: React.FC<Props> = ({ dashboardStore }) => {
             countriesToCompare,
             setCountriesToCompare
           )}
-        {(dashboardStore.allCases === null ||
-          dashboardStore.allDeaths === null) && (
-          <div>
-            <h1>Loading</h1>
-          </div>
-        )}
       </div>
     </>
   );
