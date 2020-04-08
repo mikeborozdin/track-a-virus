@@ -12,7 +12,6 @@ const DailyCases: FC<Props> = ({ cases, deaths }) => {
 
   return (
     <>
-      <h1>World snapshot</h1>
       <table className={styles['world-snapshot-data']}>
         <tbody>
           <tr>

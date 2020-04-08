@@ -1,7 +1,7 @@
 .col1-320px {
   display: grid;
   grid-template-columns: none;
-  grid-row-gap: 0.1rem;
+  grid-row-gap: 0.4rem;
 }
 
 .span-all-col {
@@ -10,6 +10,10 @@
 
 h1 {
   font-size: 1rem;
+}
+
+.inline {
+  display: inline;
 }
 
 @media only screen and (min-width: 768px) {

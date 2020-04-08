@@ -53,6 +53,10 @@ const App: React.FC<Props> = ({ dashboardStore }) => {
         {dashboardStore.allCases && dashboardStore.allDeaths && (
           <>
             <div className={styles['span-all-col']}>
+              <div>
+                <h1 className={styles.inline}>World snapshot data</h1> (updated
+                on {dashboardStore.dateUpdated})
+              </div>
               <WorldSnapshot
                 cases={
                   dashboardStore.allCases.countries[dashboardStore.WORLD_NAME]
@@ -63,7 +67,10 @@ const App: React.FC<Props> = ({ dashboardStore }) => {
               />
             </div>
             <div className={styles['span-all-col']}>
-              <h1>Detailed data</h1>
+              <div>
+                <h1 className={styles.inline}>Detailed data</h1> (updated on{' '}
+                {dashboardStore.dateUpdated})
+              </div>
               <label htmlFor='countrySelector'>
                 Select a country or a few to dive in & compare
               </label>

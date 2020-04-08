@@ -26,7 +26,13 @@ export default class DashboardStore {
 
   @computed
   get dateUpdated() {
-    return this.allCases.dates[this.allCases.dates.length - 1];
+    return this.allCases.dates[
+      this.allCases.dates.length - 1
+    ].toLocaleDateString('en-gb', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+    });
   }
 
   @action.bound
