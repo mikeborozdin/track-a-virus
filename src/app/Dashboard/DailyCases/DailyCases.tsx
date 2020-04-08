@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import LineChart from '../LineChart/LineChart';
+import LineChart from '../charts/BarChart/LineChart/LineChart';
 import { Timeseries } from '../Timeseries';
 
 interface Props {

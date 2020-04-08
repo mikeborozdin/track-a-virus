@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
 import Chart, { ChartOptions } from 'chart.js';
-import { Timeseries } from '../Timeseries';
+import { Timeseries } from '../../Timeseries';
 
 interface Props {
   data: Timeseries;

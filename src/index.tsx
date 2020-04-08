@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import App from './app/app';
+import App from './App/App';
 import { Provider } from 'mobx-react';
-import RootStore from './app/RootStore';
+import RootStore from './stores/RootStore';
 
 ReactDOM.render(
   <Provider rootStore={new RootStore()}>

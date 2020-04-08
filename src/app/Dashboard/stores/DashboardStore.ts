@@ -1,9 +1,9 @@
 import { observable, runInAction, action, computed } from 'mobx';
 import randomcolor from 'randomcolor';
-import { Timeseries } from './Timeseries';
+import { Timeseries } from '../Timeseries';
 import getCases, { getDeaths } from './data/get-data';
 
-export default class RootStore {
+export default class DashboardStore {
   @observable
   public countries: string[] = null;
 
@@ -48,8 +48,6 @@ export default class RootStore {
     runInAction(() => {
       this.allCases = cases;
       this.allDeaths = deaths;
-      // this.aggregatedGlobalCases = this.getAggregatedGlobalData(cases);
-      // this.aggregatedGlobalDeaths = this.getAggregatedGlobalData(deaths);
 
       const countries = Object.keys(this.allCases.countries);
       this.countries = countries;
@@ -120,8 +118,4 @@ export default class RootStore {
 
     return global;
   }
-}
-
-export interface AllStores {
-  rootStore: RootStore;
 }

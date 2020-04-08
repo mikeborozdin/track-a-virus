@@ -1,5 +1,5 @@
 import Papa from 'papaparse';
-import { Timeseries } from '../Timeseries';
+import { Timeseries } from '../../Timeseries';
 import parseDate from './parse-date';
 
 const NON_US_CASES_DATA_URL =
