@@ -1,0 +1,35 @@
+.col1-320px {
+  display: grid;
+  grid-template-columns: none;
+  grid-row-gap: 0.4rem;
+}
+
+.span-all-col {
+  grid-column: 1 / -1;
+}
+
+h1 {
+  font-size: 1rem;
+}
+
+.inline {
+  display: inline;
+}
+
+@media only screen and (min-width: 768px) {
+  .col2-768px {
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 3%;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .col3-1024px {
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 3%;
+  }
+}

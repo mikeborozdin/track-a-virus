@@ -1,8 +1,0 @@
-.dashboard {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-}
-
-.countrySelector {
-  grid-column: 1 / span 2;
-}

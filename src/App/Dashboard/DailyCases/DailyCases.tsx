@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import LineChart from '../LineChart/LineChart';
+import LineChart from '../charts/BarChart/LineChart/LineChart';
 import { Timeseries } from '../Timeseries';
 
 interface Props {
@@ -7,13 +7,13 @@ interface Props {
   countryColors: Record<string, string>;
 }
 
-const CountryComparison: FC<Props> = ({ data, countryColors }) => {
+const DailyCases: FC<Props> = ({ data, countryColors }) => {
   return (
     <>
-      <div>Number of daily cases</div>
+      <div>Number of cases</div>
       <LineChart data={data} countryColors={countryColors} />
     </>
   );
 };
 
-export default CountryComparison;
+export default DailyCases;

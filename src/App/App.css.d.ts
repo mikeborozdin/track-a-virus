@@ -1,6 +1,5 @@
 export interface IAppCss {
-  countrySelector: string;
-  dashboard: string;
+  content: string;
 }
 
 export const locals: IAppCss;
