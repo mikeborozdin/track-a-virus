@@ -1,5 +1,4 @@
 export interface IWorldSnapshotCss {
-  container: string;
   'world-snapshot-data': string;
 }
 
