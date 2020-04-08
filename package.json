@@ -1,7 +1,7 @@
 {
   "name": "trackavirus-web",
   "version": "1.0.0",
-  "description": "",
+  "description": "COVID-19 dashboard",
   "scripts": {
     "start": "webpack-dev-server --config ./webpack.config.js --mode development --env=dev",
     "lint": "tsc --noEmit && eslint './src/**/*.{ts,tsx}'",
@@ -11,8 +11,8 @@
     "pre-build-checks": "npm run lint && npm run prettier"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Mike Borozdin <mike.borozdin@gmail.com>",
+  "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
