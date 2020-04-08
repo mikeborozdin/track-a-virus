@@ -1,8 +1,11 @@
 import React, { FC } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 import styles from './App.css';
 import Dashboard from './Dashboard/Dashboard';
 import Header from './Header/Header';
+import About from './About/About';
+import Data from './Data/Data';
+import Roadmap from './Roadmap/Roadmap';
 
 const App: FC = () => {
   return (
@@ -10,8 +13,17 @@ const App: FC = () => {
       <Header />
       <div className={styles.content}>
         <Switch>
-          <Route path='/'>
+          <Route exact path='/'>
             <Dashboard />
+          </Route>
+          <Route path='/about'>
+            <About />
+          </Route>
+          <Route path='/data'>
+            <Data />
+          </Route>
+          <Route path='/roadmap'>
+            <Roadmap />
           </Route>
         </Switch>
       </div>

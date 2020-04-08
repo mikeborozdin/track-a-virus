@@ -30,9 +30,9 @@ const Header: FC = () => {
 
       <ul className={`${styles.menu} ${!toggleMenu ? styles.hidden : ''}`}>
         <li>
-          <Link to='/' className={styles.menuItem}>
+          <a href='/' className={styles.menuItem}>
             Home
-          </Link>
+          </a>
         </li>
         <li>
           <Link to='/data' className={styles.menuItem}>
