@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Dispatch, SetStateAction } from 'react';
 import DailyCases from './DailyCases/DailyCases';
 import styles from './Dashboard.css';
 import DailyIncrease from './DailyIncrease/DailyIncrease';
@@ -20,6 +20,95 @@ interface SelectOption {
   value: string;
   label: string;
 }
+
+const renderDashboard = (
+  dashboardStore: DashboardStore,
+  countriesToCompare: SelectOption[],
+  setCountriesToCompare: Dispatch<SetStateAction<SelectOption[]>>
+) => (
+  <>
+    <div className={styles['span-all-col']}>
+      <div>
+        <h1 className={styles.inline}>World snapshot data</h1> (updated on{' '}
+        {dashboardStore.dateUpdated})
+      </div>
+      <WorldSnapshot
+        cases={dashboardStore.allCases.countries[dashboardStore.WORLD_NAME]}
+        deaths={dashboardStore.allDeaths.countries[dashboardStore.WORLD_NAME]}
+      />
+    </div>
+    <div className={styles['span-all-col']}>
+      <div>
+        <h1 className={styles.inline}>Detailed data</h1> (updated on{' '}
+        {dashboardStore.dateUpdated})
+      </div>
+      <label htmlFor='countrySelector'>
+        Select a country or a few to dive in & compare
+      </label>
+      <Select
+        inputId='countrySelector'
+        options={getCountrySelectOptions(dashboardStore.countries)}
+        isMulti
+        value={countriesToCompare}
+        onChange={(selected) => {
+          setCountriesToCompare(selected as SelectOption[]);
+        }}
+        placeholder="Select countries to compare. Type 'World' for the worldwide data"
+      />
+    </div>
+    {dashboardStore.selectedCountriesCases && (
+      <>
+        <div className={styles['span-all-col']}>
+          <h1>Confirmed cases</h1>
+        </div>
+        <div>
+          <DailyCases
+            data={dashboardStore.selectedCountriesCases}
+            countryColors={dashboardStore.countryColors}
+          />
+        </div>
+        <div>
+          <DailyIncrease
+            data={dashboardStore.selectedCountriesCases}
+            countryColors={dashboardStore.countryColors}
+          />
+        </div>
+        <div>
+          <DailyIncreasePercentage
+            data={dashboardStore.selectedCountriesCases}
+            countryColors={dashboardStore.countryColors}
+          />
+        </div>
+      </>
+    )}
+
+    {dashboardStore.selectedCountriesDeaths && (
+      <>
+        <div className={styles['span-all-col']}>
+          <h1>Confirmed deaths</h1>
+        </div>
+        <div>
+          <DailyCases
+            data={dashboardStore.selectedCountriesDeaths}
+            countryColors={dashboardStore.countryColors}
+          />
+        </div>
+        <div>
+          <DailyIncrease
+            data={dashboardStore.selectedCountriesDeaths}
+            countryColors={dashboardStore.countryColors}
+          />
+        </div>
+        <div>
+          <DailyIncreasePercentage
+            data={dashboardStore.selectedCountriesDeaths}
+            countryColors={dashboardStore.countryColors}
+          />
+        </div>
+      </>
+    )}
+  </>
+);
 
 const App: React.FC<Props> = ({ dashboardStore }) => {
   const [countriesToCompare, setCountriesToCompare] = useState<SelectOption[]>([
@@ -50,93 +139,18 @@ const App: React.FC<Props> = ({ dashboardStore }) => {
         ${styles['col3-1024px']}
       `}
       >
-        {dashboardStore.allCases && dashboardStore.allDeaths && (
-          <>
-            <div className={styles['span-all-col']}>
-              <div>
-                <h1 className={styles.inline}>World snapshot data</h1> (updated
-                on {dashboardStore.dateUpdated})
-              </div>
-              <WorldSnapshot
-                cases={
-                  dashboardStore.allCases.countries[dashboardStore.WORLD_NAME]
-                }
-                deaths={
-                  dashboardStore.allDeaths.countries[dashboardStore.WORLD_NAME]
-                }
-              />
-            </div>
-            <div className={styles['span-all-col']}>
-              <div>
-                <h1 className={styles.inline}>Detailed data</h1> (updated on{' '}
-                {dashboardStore.dateUpdated})
-              </div>
-              <label htmlFor='countrySelector'>
-                Select a country or a few to dive in & compare
-              </label>
-              <Select
-                inputId='countrySelector'
-                options={getCountrySelectOptions(dashboardStore.countries)}
-                isMulti
-                value={countriesToCompare}
-                onChange={(selected) => {
-                  setCountriesToCompare(selected as SelectOption[]);
-                }}
-                placeholder="Select countries to compare. Type 'World' for the worldwide data"
-              />
-            </div>
-            {dashboardStore.selectedCountriesCases && (
-              <>
-                <div className={styles['span-all-col']}>
-                  <h1>Confirmed cases</h1>
-                </div>
-                <div>
-                  <DailyCases
-                    data={dashboardStore.selectedCountriesCases}
-                    countryColors={dashboardStore.countryColors}
-                  />
-                </div>
-                <div>
-                  <DailyIncrease
-                    data={dashboardStore.selectedCountriesCases}
-                    countryColors={dashboardStore.countryColors}
-                  />
-                </div>
-                <div>
-                  <DailyIncreasePercentage
-                    data={dashboardStore.selectedCountriesCases}
-                    countryColors={dashboardStore.countryColors}
-                  />
-                </div>
-              </>
-            )}
-
-            {dashboardStore.selectedCountriesDeaths && (
-              <>
-                <div className={styles['span-all-col']}>
-                  <h1>Confirmed deaths</h1>
-                </div>
-                <div>
-                  <DailyCases
-                    data={dashboardStore.selectedCountriesDeaths}
-                    countryColors={dashboardStore.countryColors}
-                  />
-                </div>
-                <div>
-                  <DailyIncrease
-                    data={dashboardStore.selectedCountriesDeaths}
-                    countryColors={dashboardStore.countryColors}
-                  />
-                </div>
-                <div>
-                  <DailyIncreasePercentage
-                    data={dashboardStore.selectedCountriesDeaths}
-                    countryColors={dashboardStore.countryColors}
-                  />
-                </div>
-              </>
-            )}
-          </>
+        {dashboardStore.allCases &&
+          dashboardStore.allDeaths &&
+          renderDashboard(
+            dashboardStore,
+            countriesToCompare,
+            setCountriesToCompare
+          )}
+        {(dashboardStore.allCases === null ||
+          dashboardStore.allDeaths === null) && (
+          <div>
+            <h1>Loading</h1>
+          </div>
         )}
       </div>
     </>

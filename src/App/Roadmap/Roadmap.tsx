@@ -17,7 +17,7 @@ const Roadmap: FC = () => (
         </a>{' '}
       </li>
       <li>
-        Since it's an open source,{' '}
+        Since it&apos;s an open source,{' '}
         <a
           href='https://github.com/mikeborozdin/track-a-virus'
           target='_blank'

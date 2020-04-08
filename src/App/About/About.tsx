@@ -45,12 +45,12 @@ const About: FC = () => (
           target='_blank'
           rel='noopener noreferrer'
         >
-          It's an open-source project - everybody can get the source code
+          It&apos;s an open-source project - everybody can get the source code
         </a>
       </li>
       <li>And everybody is welcome to contribute</li>
       <li>
-        It's originally created by Mike Borozdin - a London based software
+        It&apos;s originally created by Mike Borozdin - a London based software
         engineer
       </li>
       <li>
