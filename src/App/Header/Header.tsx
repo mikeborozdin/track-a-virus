@@ -49,6 +49,21 @@ const Header: FC = () => {
             About
           </Link>
         </li>
+        <li>
+          <a
+            href='https://github.com/mikeborozdin/track-a-virus'
+            target='_blank'
+            rel='noopener noreferrer'
+            className={styles.menuItem}
+          >
+            GitHub
+          </a>
+        </li>
+        <li>
+          <Link to='/cookies' className={styles.menuItem}>
+            Cookies & Privacy
+          </Link>
+        </li>
       </ul>
     </div>
   );

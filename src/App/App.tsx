@@ -6,6 +6,7 @@ import Header from './Header/Header';
 import About from './About/About';
 import Data from './Data/Data';
 import Roadmap from './Roadmap/Roadmap';
+import Cookies from './Cookies/Cookies';
 
 const App: FC = () => {
   return (
@@ -24,6 +25,9 @@ const App: FC = () => {
           </Route>
           <Route path='/roadmap'>
             <Roadmap />
+          </Route>
+          <Route path='/cookies'>
+            <Cookies />
           </Route>
         </Switch>
       </div>
