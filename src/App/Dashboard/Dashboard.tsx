@@ -7,6 +7,7 @@ import DashboardStore from './stores/DashboardStore';
 import { observer, inject } from 'mobx-react';
 import Select from 'react-select';
 import { AllStores } from '../../stores/RootStore';
+import WorldSnapshot from './WorldSnapshot/WorldSnapshot';
 
 interface Props {
   dashboardStore?: DashboardStore;
@@ -52,6 +53,17 @@ const App: React.FC<Props> = ({ dashboardStore }) => {
         {dashboardStore.allCases && dashboardStore.allDeaths && (
           <>
             <div className={styles['span-all-col']}>
+              <WorldSnapshot
+                cases={
+                  dashboardStore.allCases.countries[dashboardStore.WORLD_NAME]
+                }
+                deaths={
+                  dashboardStore.allDeaths.countries[dashboardStore.WORLD_NAME]
+                }
+              />
+            </div>
+            <div className={styles['span-all-col']}>
+              <h1>Detailed data</h1>
               <label htmlFor='countrySelector'>
                 Select a country or a few to dive in & compare
               </label>
