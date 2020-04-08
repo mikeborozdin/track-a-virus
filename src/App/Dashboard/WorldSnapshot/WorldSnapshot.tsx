@@ -33,7 +33,7 @@ const DailyCases: FC<Props> = ({ cases, deaths }) => {
           </tr>
           <tr>
             <td>Average mortality</td>
-            <td>{(worldSnapshot.mortality * 100).toFixed()}%</td>
+            <td>{(worldSnapshot.mortality * 100).toFixed(2)}%</td>
           </tr>
         </tbody>
       </table>
