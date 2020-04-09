@@ -1,6 +1,6 @@
 {
   "name": "trackavirus-web",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "COVID-19 dashboard",
   "scripts": {
     "start": "webpack-dev-server --config ./webpack.config.js --mode development --env=dev",
