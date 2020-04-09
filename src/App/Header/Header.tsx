@@ -20,13 +20,12 @@ const Header: FC = () => {
         </div>
       </div>
 
-      <a
-        href='#'
+      <div
         onClick={() => setToggleMenu(!toggleMenu)}
         className={styles.menuButton}
       >
         &#9776;
-      </a>
+      </div>
 
       <ul className={`${styles.menu} ${!toggleMenu ? styles.hidden : ''}`}>
         <li>
@@ -35,17 +34,29 @@ const Header: FC = () => {
           </a>
         </li>
         <li>
-          <Link to='/data' className={styles.menuItem}>
+          <Link
+            to='/data'
+            className={styles.menuItem}
+            onClick={() => setToggleMenu(!toggleMenu)}
+          >
             Data
           </Link>
         </li>
         <li>
-          <Link to='/roadmap' className={styles.menuItem}>
+          <Link
+            to='/roadmap'
+            className={styles.menuItem}
+            onClick={() => setToggleMenu(!toggleMenu)}
+          >
             Feature roadmap
           </Link>
         </li>
         <li>
-          <Link to='/about' className={styles.menuItem}>
+          <Link
+            to='/about'
+            className={styles.menuItem}
+            onClick={() => setToggleMenu(!toggleMenu)}
+          >
             About
           </Link>
         </li>
@@ -60,8 +71,12 @@ const Header: FC = () => {
           </a>
         </li>
         <li>
-          <Link to='/cookies' className={styles.menuItem}>
-            Cookies & Privacy
+          <Link
+            to='/cookies'
+            className={styles.menuItem}
+            onClick={() => setToggleMenu(!toggleMenu)}
+          >
+            Cookies &amp; Privacy
           </Link>
         </li>
       </ul>
