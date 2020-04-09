@@ -52,13 +52,11 @@
   padding-left: 0px;
 }
 
-.menuItem {
-  display: inline-block;
-  width: 100%;
-}
-
 .menu li {
   border-top: 1px solid #fff;
+  width: 100%;
+  font-size: 1.5rem;
+  display: inline-block;
   width: 100%;
 }
 
@@ -70,7 +68,7 @@
   display: none;
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 1024px) {
   :root {
     --logo-font-size: 2rem;
   }
