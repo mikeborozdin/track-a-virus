@@ -4,8 +4,7 @@ export interface IHeaderCss {
   hidden: string;
   logo: string;
   menu: string;
-  menuButton: string;
-  menuItem: string;
+  'menu-toggle': string;
   visible: string;
 }
 

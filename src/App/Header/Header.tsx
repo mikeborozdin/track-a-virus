@@ -22,41 +22,27 @@ const Header: FC = () => {
 
       <div
         onClick={() => setToggleMenu(!toggleMenu)}
-        className={styles.menuButton}
+        className={styles['menu-toggle']}
       >
         &#9776;
       </div>
 
       <ul className={`${styles.menu} ${!toggleMenu ? styles.hidden : ''}`}>
         <li>
-          <a href='/' className={styles.menuItem}>
-            Home
-          </a>
+          <a href='/'>Home</a>
         </li>
         <li>
-          <Link
-            to='/data'
-            className={styles.menuItem}
-            onClick={() => setToggleMenu(!toggleMenu)}
-          >
+          <Link to='/data' onClick={() => setToggleMenu(!toggleMenu)}>
             Data
           </Link>
         </li>
         <li>
-          <Link
-            to='/roadmap'
-            className={styles.menuItem}
-            onClick={() => setToggleMenu(!toggleMenu)}
-          >
+          <Link to='/roadmap' onClick={() => setToggleMenu(!toggleMenu)}>
             Feature roadmap
           </Link>
         </li>
         <li>
-          <Link
-            to='/about'
-            className={styles.menuItem}
-            onClick={() => setToggleMenu(!toggleMenu)}
-          >
+          <Link to='/about' onClick={() => setToggleMenu(!toggleMenu)}>
             About
           </Link>
         </li>
@@ -65,17 +51,12 @@ const Header: FC = () => {
             href='https://github.com/mikeborozdin/track-a-virus'
             target='_blank'
             rel='noopener noreferrer'
-            className={styles.menuItem}
           >
             GitHub
           </a>
         </li>
         <li>
-          <Link
-            to='/cookies'
-            className={styles.menuItem}
-            onClick={() => setToggleMenu(!toggleMenu)}
-          >
+          <Link to='/cookies' onClick={() => setToggleMenu(!toggleMenu)}>
             Cookies &amp; Privacy
           </Link>
         </li>
