@@ -36,7 +36,7 @@
   text-decoration: underline;
 }
 
-.menuButton {
+.menu-toggle {
   display: block;
   color: #fff;
   position: absolute;
@@ -77,22 +77,22 @@
     position: relative;
     float: left;
     width: auto;
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
   }
 
-  .menuButton {
+  .menu-toggle {
     display: none;
   }
 
   .menu {
     display: block;
     position: absolute;
-    right: 30px;
+    right: 2rem;
     width: auto;
-    padding: 0px;
-    margin-left: 0px;
-    margin-bottom: 0px;
+    padding: 0;
+    margin-left: 0;
+    margin-bottom: 0;
   }
 
   .menu li {
@@ -100,9 +100,6 @@
     display: inline;
     margin-left: 20px;
     border: 0px;
-  }
-
-  .menuItem {
-    display: inline;
+    font-size: 1rem;
   }
 }

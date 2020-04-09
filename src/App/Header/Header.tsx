@@ -22,7 +22,7 @@ const Header: FC = () => {
 
       <div
         onClick={() => setToggleMenu(!toggleMenu)}
-        className={styles.menuButton}
+        className={styles['menu-toggle']}
       >
         &#9776;
       </div>
