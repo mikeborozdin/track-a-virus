@@ -1,6 +1,5 @@
 const webpack = require('webpack');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
-const Dotenv = require('dotenv-webpack');
 
 const injectGa = (env) => {
   const gaCode = `<!-- Global site tag (gtag.js) - Google Analytics -->
@@ -70,9 +69,6 @@ module.exports = (env) => {
         template: './src/index.html',
         favicon: './src/favicon.ico',
         ga: injectGa(env),
-      }),
-      new Dotenv({
-        path: env === 'production' ? './.env' : './.env.development',
       }),
     ],
     devServer: {

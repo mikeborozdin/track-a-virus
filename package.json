@@ -1,6 +1,6 @@
 {
   "name": "trackavirus-web",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "COVID-19 dashboard",
   "scripts": {
     "start": "webpack-dev-server --config ./webpack.config.js --mode development --env=dev",
@@ -34,7 +34,6 @@
     "@typescript-eslint/parser": "^2.25.0",
     "awesome-typescript-loader": "^5.2.1",
     "css-loader": "^3.2.0",
-    "dotenv": "^8.2.0",
     "dotenv-webpack": "^1.7.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.12.1",
