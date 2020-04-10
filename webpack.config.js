@@ -1,6 +1,24 @@
 const webpack = require('webpack');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
-const Dotenv = require('dotenv-webpack');
+
+const injectGa = (env) => {
+  const gaCode = `<!-- Global site tag (gtag.js) - Google Analytics -->
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=UA-163167920-1"
+  ></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-163167920-1');
+  </script>`;
+
+  return env === 'production' ? gaCode : null;
+};
 
 module.exports = (env) => {
   return {
@@ -35,26 +53,23 @@ module.exports = (env) => {
             {
               loader: 'css-loader',
               options: { modules: { localIdentName: '[local]-[hash]' } },
-            }
-          ]
+            },
+          ],
         },
 
         {
           test: /\.(png|svg|jpg|gif)$/,
-          use: [
-            'file-loader',
-          ],
+          use: ['file-loader'],
         },
-      ]
+      ],
     },
     plugins: [
       new webpack.HotModuleReplacementPlugin(),
-      new HtmlWebPackPlugin({ template: './src/index.html', favicon: "./src/favicon.ico" }),
-      new Dotenv(
-        {
-          path: env === 'production' ? './.env' : './.env.development'
-        }
-      )
+      new HtmlWebPackPlugin({
+        template: './src/index.html',
+        favicon: './src/favicon.ico',
+        ga: injectGa(env),
+      }),
     ],
     devServer: {
       contentBase: './dist',
