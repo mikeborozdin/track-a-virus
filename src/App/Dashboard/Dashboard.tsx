@@ -1,5 +1,5 @@
 import React, { useEffect, useState, Dispatch, SetStateAction } from 'react';
-import DailyCases from './DailyCases/DailyCases';
+import DailyCases from './DailyData/DailyData';
 import styles from './Dashboard.css';
 import DailyIncrease from './DailyIncrease/DailyIncrease';
 import DailyIncreasePercentage from './DailyIncreasePercentage/DailyIncreasePercentage';
