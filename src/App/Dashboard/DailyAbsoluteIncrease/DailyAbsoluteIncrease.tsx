@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import BarChart from '../charts/BarChart/BarChart';
 import LineChart from '../charts/LineChart/LineChart';
 import { Timeseries } from '../types/Timeseries';
-import calculateDailyAbsoluteIncrease from './calculate-absolute-daily-increase';
+import calculateDailyAbsoluteIncrease from './calculate-daily-absolute-increase';
 
 interface Props {
   data: Timeseries;

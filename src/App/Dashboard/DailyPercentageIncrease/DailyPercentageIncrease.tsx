@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import BarChart from '../charts/BarChart/BarChart';
 import LineChart from '../charts/LineChart/LineChart';
 import { Timeseries } from '../types/Timeseries';
-import calculateDailyIncreasePercentage from './calculate-daily-increase-percentage';
+import calculateDailyPercentageIncrease from './calculate-daily-percentage-increase';
 
 interface Props {
   data: Timeseries;
@@ -40,14 +40,14 @@ const getChartOptions = (): Chart.ChartOptions => ({
   },
 });
 
-const DailyIncrease: FC<Props> = ({ data, countryColors }) => {
+const DailyPercentageIncrease: FC<Props> = ({ data, countryColors }) => {
   const Chart = Object.keys(data.countries).length > 1 ? LineChart : BarChart;
 
   return (
     <>
       <div>Daily increase %</div>
       <Chart
-        data={calculateDailyIncreasePercentage(data)}
+        data={calculateDailyPercentageIncrease(data)}
         countryColors={countryColors}
         chartOptions={getChartOptions()}
       />
@@ -55,4 +55,4 @@ const DailyIncrease: FC<Props> = ({ data, countryColors }) => {
   );
 };
 
-export default DailyIncrease;
+export default DailyPercentageIncrease;

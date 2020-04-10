@@ -1,24 +1,24 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import DailyAbsoluteIncrease from './DailyAbsoluteIncrease';
+import DailyPercentageIncrease from './DailyPercentageIncrease';
 import { Timeseries } from '../types/Timeseries';
 import CountryColors from '../types/CountryColors';
 import BarChart from '../charts/BarChart/BarChart';
 import LineChart from '../charts/LineChart/LineChart';
-import calculateAbsoluteDailyIncrease from './calculate-daily-absolute-increase';
+import calculateDailyPercentageIncrease from './calculate-daily-percentage-increase';
 
-jest.mock('./calculate-daily-absolute-increase', () => jest.fn());
+jest.mock('./calculate-daily-percentage-increase', () => jest.fn());
 
-const calculateAbsoluteDailyIncreaseMock = calculateAbsoluteDailyIncrease as jest.Mock;
+const calculateDailyPercentageIncreaseMock = calculateDailyPercentageIncrease as jest.Mock;
 const MOCK_DAILY_INCREASE = {};
-calculateAbsoluteDailyIncreaseMock.mockReturnValue(MOCK_DAILY_INCREASE);
+calculateDailyPercentageIncreaseMock.mockReturnValue(MOCK_DAILY_INCREASE);
 
 const COUNTRY_COLORS: CountryColors = {
   countryA: 'red',
   countryB: 'green',
 };
 
-describe('DailyAbsoluteIncrease', () => {
+describe('DailyPercentageIncrease', () => {
   test('Shows bar chart with correct attributes if data just for one country', () => {
     const dataForOneCountry: Timeseries = {
       dates: [new Date()],
@@ -26,13 +26,13 @@ describe('DailyAbsoluteIncrease', () => {
     };
 
     const component = shallow(
-      <DailyAbsoluteIncrease
+      <DailyPercentageIncrease
         data={dataForOneCountry}
         countryColors={COUNTRY_COLORS}
       />
     );
 
-    expect(calculateAbsoluteDailyIncreaseMock).toHaveBeenCalledWith(
+    expect(calculateDailyPercentageIncreaseMock).toHaveBeenCalledWith(
       dataForOneCountry
     );
 
@@ -50,7 +50,7 @@ describe('DailyAbsoluteIncrease', () => {
     };
 
     const component = shallow(
-      <DailyAbsoluteIncrease
+      <DailyPercentageIncrease
         data={dataForTwoCountries}
         countryColors={COUNTRY_COLORS}
       />
