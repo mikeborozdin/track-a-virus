@@ -6,6 +6,7 @@
     "start": "webpack-dev-server --config ./webpack.config.js --mode development --env=dev",
     "lint": "tsc --noEmit && eslint './src/**/*.{ts,tsx}'",
     "test": "jest",
+    "test:coverage": "jest --coverage",
     "build": "npm run pre-build-checks && webpack --mode=production --env=production",
     "deploy": "npm run build && rm ../dist/* && cp ./dist/* ../dist && cd ../dist && git add . && git commit -am 'release' && git push && cd ../ui",
     "prettier": "prettier ./src -c",

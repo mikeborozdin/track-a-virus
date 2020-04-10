@@ -3,10 +3,10 @@ import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 import styles from './App.css';
 import Dashboard from './Dashboard/Dashboard';
 import Header from './Header/Header';
-import About from './About/About';
-import Data from './Data/Data';
-import Roadmap from './Roadmap/Roadmap';
-import Cookies from './Cookies/Cookies';
+import About from './static-pages/About/About';
+import Data from './static-pages/Data/Data';
+import Roadmap from './static-pages/Roadmap/Roadmap';
+import Cookies from './static-pages/Cookies/Cookies';
 
 const App: FC = () => {
   return (
