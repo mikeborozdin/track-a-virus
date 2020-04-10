@@ -1,6 +1,8 @@
+@import '../../App.css';
+
 .svg {
-  fill: #515151;
-  stroke: #515151;
+  fill: var(--gray);
+  stroke: var(--gray);
   width: 10rem;
   height: 10rem;
 }
