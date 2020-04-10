@@ -13,10 +13,10 @@ export default class DashboardStore {
   public countryColors: Record<string, string> = {};
 
   @observable
-  public allCases: Timeseries;
+  public allCases: Timeseries = null;
 
   @observable
-  public allDeaths: Timeseries;
+  public allDeaths: Timeseries = null;
 
   @observable
   public selectedCountriesCases: Timeseries = null;

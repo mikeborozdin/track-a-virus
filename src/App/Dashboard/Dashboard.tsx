@@ -8,6 +8,7 @@ import { observer, inject } from 'mobx-react';
 import Select from 'react-select';
 import { AllStores } from '../../stores/RootStore';
 import WorldSnapshot from './WorldSnapshot/WorldSnapshot';
+import LoadingSpinner from './LoadingSpinner/LoadingSpinner';
 
 interface Props {
   dashboardStore?: DashboardStore;
@@ -152,6 +153,12 @@ const App: React.FC<Props> = ({ dashboardStore }) => {
             countriesToCompare,
             setCountriesToCompare
           )}
+        {(dashboardStore.allCases === null ||
+          dashboardStore.allDeaths === null) && (
+          <div className={`${styles['span-all-col']} ${styles['center']}`}>
+            <LoadingSpinner />
+          </div>
+        )}
       </div>
     </>
   );

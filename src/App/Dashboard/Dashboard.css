@@ -2,6 +2,7 @@
   display: grid;
   grid-template-columns: none;
   grid-row-gap: 0.4rem;
+  height: 100%;
 }
 
 .span-all-col {
@@ -16,10 +17,18 @@ h1 {
   display: inline;
 }
 
+.center {
+  place-self: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @media only screen and (min-width: 768px) {
   .col2-768px {
     grid-template-columns: repeat(2, 1fr);
     grid-column-gap: 3%;
+    height: 100%;
   }
 
   h1 {
@@ -31,5 +40,6 @@ h1 {
   .col3-1024px {
     grid-template-columns: repeat(3, 1fr);
     grid-column-gap: 3%;
+    height: 100%;
   }
 }
