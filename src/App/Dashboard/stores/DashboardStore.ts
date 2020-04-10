@@ -1,7 +1,8 @@
 import { observable, runInAction, action, computed } from 'mobx';
-import { Timeseries } from '../Timeseries';
+import { Timeseries } from '../types/Timeseries';
 import { getCases, getDeaths, WORLD_NAME } from './data/get-data';
 import getRandomCountryColors from './get-random-colors';
+import CountryColors from '../types/CountryColors';
 
 export default class DashboardStore {
   public WORLD_NAME = WORLD_NAME;
@@ -10,7 +11,7 @@ export default class DashboardStore {
   public countries: string[] = null;
 
   @observable
-  public countryColors: Record<string, string> = {};
+  public countryColors: CountryColors = {};
 
   @observable
   public allCases: Timeseries = null;

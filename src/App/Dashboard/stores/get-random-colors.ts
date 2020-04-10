@@ -1,4 +1,5 @@
 import randomcolor from 'randomcolor';
+import CountryColors from '../types/CountryColors';
 
 const getRandomCountryColors = (countries: string[]) => {
   const colors = randomcolor({
@@ -7,7 +8,7 @@ const getRandomCountryColors = (countries: string[]) => {
     hue: 'random',
   });
 
-  const countryColors: Record<string, string> = {};
+  const countryColors: CountryColors = {};
 
   for (let i = 0; i < countries.length; i++) {
     countryColors[countries[i]] = colors[i];

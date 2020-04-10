@@ -1,4 +1,4 @@
-import { Timeseries } from '../Timeseries';
+import { Timeseries } from '../types/Timeseries';
 
 const calculateDailyIncrease = (originalData: Timeseries) => {
   const dailyIncrease: Timeseries = {

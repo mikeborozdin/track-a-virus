@@ -9,6 +9,8 @@ import Select from 'react-select';
 import { AllStores } from '../../stores/RootStore';
 import WorldSnapshot from './WorldSnapshot/WorldSnapshot';
 import LoadingSpinner from './LoadingSpinner/LoadingSpinner';
+import { Timeseries } from './types/Timeseries';
+import CountryColors from './types/CountryColors';
 
 interface Props {
   dashboardStore?: DashboardStore;
@@ -22,54 +24,23 @@ interface SelectOption {
   label: string;
 }
 
-const renderCasesForSelectedCountries = (dashboardStore: DashboardStore) => (
+const renderDataForSelectedCountries = (
+  title: string,
+  data: Timeseries,
+  countryColors: CountryColors
+) => (
   <>
     <div className={styles['span-all-col']}>
-      <h1>Confirmed cases</h1>
+      <h1>{title}</h1>
     </div>
     <div>
-      <DailyCases
-        data={dashboardStore.selectedCountriesCases}
-        countryColors={dashboardStore.countryColors}
-      />
+      <DailyCases data={data} countryColors={countryColors} />
     </div>
     <div>
-      <DailyIncrease
-        data={dashboardStore.selectedCountriesCases}
-        countryColors={dashboardStore.countryColors}
-      />
+      <DailyIncrease data={data} countryColors={countryColors} />
     </div>
     <div>
-      <DailyIncreasePercentage
-        data={dashboardStore.selectedCountriesCases}
-        countryColors={dashboardStore.countryColors}
-      />
-    </div>
-  </>
-);
-
-const renderDeathsForSelectedCountries = (dashboardStore: DashboardStore) => (
-  <>
-    <div className={styles['span-all-col']}>
-      <h1>Confirmed deaths</h1>
-    </div>
-    <div>
-      <DailyCases
-        data={dashboardStore.selectedCountriesDeaths}
-        countryColors={dashboardStore.countryColors}
-      />
-    </div>
-    <div>
-      <DailyIncrease
-        data={dashboardStore.selectedCountriesDeaths}
-        countryColors={dashboardStore.countryColors}
-      />
-    </div>
-    <div>
-      <DailyIncreasePercentage
-        data={dashboardStore.selectedCountriesDeaths}
-        countryColors={dashboardStore.countryColors}
-      />
+      <DailyIncreasePercentage data={data} countryColors={countryColors} />
     </div>
   </>
 );
@@ -96,7 +67,7 @@ const renderDashboard = (
         {dashboardStore.dateUpdated})
       </div>
       <label htmlFor='countrySelector'>
-        Select a country or a few to dive in & compare
+        Select a country or a few to dive in &amp; compare
       </label>
       <Select
         inputId='countrySelector'
@@ -110,10 +81,18 @@ const renderDashboard = (
       />
     </div>
     {dashboardStore.selectedCountriesCases &&
-      renderCasesForSelectedCountries(dashboardStore)}
+      renderDataForSelectedCountries(
+        'Confirmed cases',
+        dashboardStore.selectedCountriesCases,
+        dashboardStore.countryColors
+      )}
 
     {dashboardStore.selectedCountriesDeaths &&
-      renderDeathsForSelectedCountries(dashboardStore)}
+      renderDataForSelectedCountries(
+        'Confirmed deaths',
+        dashboardStore.selectedCountriesDeaths,
+        dashboardStore.countryColors
+      )}
   </>
 );
 
@@ -154,11 +133,7 @@ const App: React.FC<Props> = ({ dashboardStore }) => {
             setCountriesToCompare
           )}
         {(dashboardStore.allCases === null ||
-          dashboardStore.allDeaths === null) && (
-          <div className={`${styles['span-all-col']} ${styles['center']}`}>
-            <LoadingSpinner />
-          </div>
-        )}
+          dashboardStore.allDeaths === null) && <LoadingSpinner />}
       </div>
     </>
   );

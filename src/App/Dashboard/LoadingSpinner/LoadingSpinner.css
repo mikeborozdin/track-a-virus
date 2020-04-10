@@ -5,4 +5,10 @@
   stroke: var(--gray);
   width: 10rem;
   height: 10rem;
+  display: block;
+  margin: auto;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
