@@ -125,15 +125,13 @@ const App: React.FC<Props> = ({ dashboardStore }) => {
         ${styles['col3-1024px']}
       `}
       >
-        {dashboardStore.allCases &&
-          dashboardStore.allDeaths &&
+        {dashboardStore.isLoaded &&
           renderDashboard(
             dashboardStore,
             countriesToCompare,
             setCountriesToCompare
           )}
-        {(dashboardStore.allCases === null ||
-          dashboardStore.allDeaths === null) && <LoadingSpinner />}
+        {!dashboardStore.isLoaded && <LoadingSpinner />}
       </div>
     </>
   );

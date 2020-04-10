@@ -7,10 +7,8 @@ import CountryColors from '../types/CountryColors';
 export default class DashboardStore {
   public WORLD_NAME = WORLD_NAME;
 
-  @observable
   public countries: string[] = null;
 
-  @observable
   public countryColors: CountryColors = {};
 
   @observable
@@ -26,7 +24,7 @@ export default class DashboardStore {
   public selectedCountriesDeaths: Timeseries = null;
 
   @computed
-  get dateUpdated() {
+  public get dateUpdated() {
     return this.allCases.dates[
       this.allCases.dates.length - 1
     ].toLocaleDateString('en-gb', {
@@ -34,6 +32,11 @@ export default class DashboardStore {
       day: 'numeric',
       year: 'numeric',
     });
+  }
+
+  @computed
+  public get isLoaded() {
+    return this.allCases && this.allDeaths;
   }
 
   @action.bound
