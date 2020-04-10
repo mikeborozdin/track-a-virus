@@ -3,19 +3,19 @@ import React from 'react';
 import DailyData from './DailyData';
 import { Timeseries } from '../types/Timeseries';
 import CountryColors from '../types/CountryColors';
-import LineChart from '../charts/BarChart/LineChart/LineChart';
+import LineChart from '../charts/LineChart/LineChart';
 
 describe('DailyData', () => {
-  const data: Timeseries = {
-    dates: [new Date()],
-    countries: { someCountry: [1] },
-  };
-
-  const countryColors: CountryColors = {
-    someCountry: '#000',
-  };
-
   test('Shows line chart with correct attributes', () => {
+    const data: Timeseries = {
+      dates: [new Date()],
+      countries: { someCountry: [1] },
+    };
+
+    const countryColors: CountryColors = {
+      someCountry: '#000',
+    };
+
     const component = shallow(
       <DailyData data={data} countryColors={countryColors} />
     );

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import LineChart from '../charts/BarChart/LineChart/LineChart';
+import LineChart from '../charts/LineChart/LineChart';
 import { Timeseries } from '../types/Timeseries';
 import CountryColors from '../types/CountryColors';
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, Dispatch, SetStateAction } from 'react';
 import DailyCases from './DailyData/DailyData';
 import styles from './Dashboard.css';
-import DailyIncrease from './DailyIncrease/DailyIncrease';
+import DailyIncrease from './DailyAbsoluteIncrease/DailyAbsoluteIncrease';
 import DailyIncreasePercentage from './DailyIncreasePercentage/DailyIncreasePercentage';
 import DashboardStore from './stores/DashboardStore';
 import { observer, inject } from 'mobx-react';

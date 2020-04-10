@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
-import LineChart from '../charts/BarChart/LineChart/LineChart';
-import { Timeseries } from '../types/Timeseries';
-import calculateDailyIncrease from './calculate-daily-increase';
 import BarChart from '../charts/BarChart/BarChart';
+import LineChart from '../charts/LineChart/LineChart';
+import { Timeseries } from '../types/Timeseries';
+import calculateDailyAbsoluteIncrease from './calculate-absolute-daily-increase';
 
 interface Props {
   data: Timeseries;
@@ -16,7 +16,7 @@ const DailyIncrease: FC<Props> = ({ data, countryColors }) => {
     <>
       <div>Daily increase</div>
       <Chart
-        data={calculateDailyIncrease(data)}
+        data={calculateDailyAbsoluteIncrease(data)}
         countryColors={countryColors}
       />
     </>

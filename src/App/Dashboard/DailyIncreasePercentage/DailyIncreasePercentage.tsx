@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
-import LineChart from '../charts/BarChart/LineChart/LineChart';
+import BarChart from '../charts/BarChart/BarChart';
+import LineChart from '../charts/LineChart/LineChart';
 import { Timeseries } from '../types/Timeseries';
 import calculateDailyIncreasePercentage from './calculate-daily-increase-percentage';
-import BarChart from '../charts/BarChart/BarChart';
 
 interface Props {
   data: Timeseries;

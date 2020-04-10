@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
 import Chart, { ChartOptions } from 'chart.js';
-import { Timeseries } from '../../../types/Timeseries';
-import CountryColors from '../../../types/CountryColors';
+import { Timeseries } from '../../types/Timeseries';
+import CountryColors from '../../types/CountryColors';
 
 interface Props {
   data: Timeseries;
