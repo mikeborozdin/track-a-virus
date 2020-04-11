@@ -39,17 +39,53 @@ const sample: Timeseries = {
 
 ### Developing a new dashboard component
 
-If you want to develop a new dashboard component, most likely you can follow the existing patterns. For example, let's have a look at the `DailyAbsoluteIncrease` component.
+Imagine you want to add a new dashboard component that, for example, shows [a growth rate](https://github.com/mikeborozdin/track-a-virus/issues/19) for selected countries. So all you need to do is the following:
 
-When we render it, we just pass a data projection and country colors:
+- Create a new component and place it in its own folder in the `./src/Dashboard` directory. Say, `./src/Dashboard/GrowthRate/GrowthRate.tsx`.
+- Add it to `Dashboard`, specifically to the `renderDataForSelectedCountries()` function
+  - Something like this: `<GrowthRate data={data} countryColors={countryColors} />`
+  - `renderDataForSelectedCountries()` will display the component for both cases and deaths
+  - And it will pass a variable `data` - an instance of `Timeseries` to your component
+  - That variable will include the daily data for the selected countries
+  - You may not need the `countryColors` prop if you're splitting data by countries
+  - It'll be either cases or deaths, depending on the the arguments `renderDataForSelectedCountries()` is called with
+- Now it's time to implement the `GrowthRate` component itself
 
-```jsx
-<DailyAbsoluteIncrease data={data} countryColors={countryColors} />
-```
+  - And then it is entirely up to you how you write your component!
+  - The pattern so far is to have a helper function that processes input data
+  - In this case with the growth rate you may want to transform a number of daily cases/deaths into first absolute increases and then percentages
+  - It is likely that your component will end up looking like `<DailyIncrease>`:
 
-In this, case `data` is an instance of `Timeseries` that only have countries chosen in the select box. So your component doesn't need to worry about it at all.
+  ```tsx
+  import React, { FC } from 'react';
+  import BarChart from '../charts/BarChart/BarChart';
+  import LineChart from '../charts/LineChart/LineChart';
+  import { Timeseries } from '../types/Timeseries';
+  import calculateDailyAbsoluteIncrease from './calculate-daily-absolute-increase';
+  import CountryColors from '../types/CountryColors';
 
-Then in the component implementation you can do whatever magic you want with that data. In the case of `DailyAbsoluteIncrease` we just call a helper function `calculateDailyAbsoluteIncrease()` that transforms the daily cases into the absolute increases for every single day.
+  interface Props {
+    data: Timeseries;
+    countryColors: CountryColors;
+  }
+
+  const GrowthRate: FC<Props> = ({ data, countryColors }) => {
+    const Chart = Object.keys(data.countries).length > 1 ? LineChart : BarChart;
+
+    return (
+      <>
+        <div>Daily increase</div>
+        <Chart data={calculateGrowthRate(data)} countryColors={countryColors} />
+      </>
+    );
+  };
+
+  export default GrowthRate;
+  ```
+
+- And then all you need is to implement that `calculateGrowthRate()` function.
+  - Check with existing functions like `./src/DailyAbsoluteIncrease/calculate-daily-absolute-increase.ts`
+  - Or `./src/App/Dashboard/DailyPercentageIncrease/calculate-daily-percentage-increase.ts`
 
 ### Unit testing
 
