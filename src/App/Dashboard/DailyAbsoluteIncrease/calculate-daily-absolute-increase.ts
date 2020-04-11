@@ -1,6 +1,6 @@
 import { Timeseries } from '../types/Timeseries';
 
-const calculateDailyIncrease = (originalData: Timeseries) => {
+const calculateDailyAbsoluteIncrease = (originalData: Timeseries) => {
   const dailyIncrease: Timeseries = {
     dates: [...originalData.dates],
     countries: {},
@@ -21,4 +21,4 @@ const calculateDailyIncrease = (originalData: Timeseries) => {
   return dailyIncrease;
 };
 
-export default calculateDailyIncrease;
+export default calculateDailyAbsoluteIncrease;

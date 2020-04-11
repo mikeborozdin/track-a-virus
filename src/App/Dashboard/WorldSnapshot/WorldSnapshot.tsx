@@ -7,7 +7,7 @@ interface Props {
   deaths: number[];
 }
 
-const DailyCases: FC<Props> = ({ cases, deaths }) => {
+const WorldSnapshot: FC<Props> = ({ cases, deaths }) => {
   const worldSnapshot = calculateWorldsnapshot(cases, deaths);
 
   return (
@@ -40,4 +40,4 @@ const DailyCases: FC<Props> = ({ cases, deaths }) => {
   );
 };
 
-export default DailyCases;
+export default WorldSnapshot;
