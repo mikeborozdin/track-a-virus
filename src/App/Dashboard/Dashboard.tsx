@@ -1,8 +1,8 @@
 import React, { useEffect, useState, Dispatch, SetStateAction } from 'react';
 import DailyCases from './DailyData/DailyData';
 import styles from './Dashboard.css';
-import DailyIncrease from './DailyAbsoluteIncrease/DailyAbsoluteIncrease';
-import DailyIncreasePercentage from './DailyPercentageIncrease/DailyPercentageIncrease';
+import DailyAbsoluteIncrease from './DailyAbsoluteIncrease/DailyAbsoluteIncrease';
+import DailyPercentageIncrease from './DailyPercentageIncrease/DailyPercentageIncrease';
 import DashboardStore from './stores/DashboardStore';
 import { observer, inject } from 'mobx-react';
 import Select from 'react-select';
@@ -37,11 +37,33 @@ const renderDataForSelectedCountries = (
       <DailyCases data={data} countryColors={countryColors} />
     </div>
     <div>
-      <DailyIncrease data={data} countryColors={countryColors} />
+      <DailyAbsoluteIncrease data={data} countryColors={countryColors} />
     </div>
     <div>
-      <DailyIncreasePercentage data={data} countryColors={countryColors} />
+      <DailyPercentageIncrease data={data} countryColors={countryColors} />
     </div>
+  </>
+);
+
+const renderCountrySelector = (
+  allCountries: string[],
+  countriesToCompare: SelectOption[],
+  setCountriesToCompare: Dispatch<SetStateAction<SelectOption[]>>
+) => (
+  <>
+    <label htmlFor='countrySelector'>
+      Select a country or a few to dive in &amp; compare
+    </label>
+    <Select
+      inputId='countrySelector'
+      options={getCountrySelectOptions(allCountries)}
+      isMulti
+      value={countriesToCompare}
+      onChange={(selected) => {
+        setCountriesToCompare(selected as SelectOption[]);
+      }}
+      placeholder="Select countries to compare. Type 'World' for the worldwide data"
+    />
   </>
 );
 
@@ -57,29 +79,23 @@ const renderDashboard = (
         {dashboardStore.dateUpdated})
       </div>
       <WorldSnapshot
-        cases={dashboardStore.allCases.countries[dashboardStore.WORLD_NAME]}
-        deaths={dashboardStore.allDeaths.countries[dashboardStore.WORLD_NAME]}
+        cases={dashboardStore.allCases.countries[DashboardStore.WORLD_NAME]}
+        deaths={dashboardStore.allDeaths.countries[DashboardStore.WORLD_NAME]}
       />
     </div>
+
     <div className={styles['span-all-col']}>
       <div>
         <h1 className={styles.inline}>Detailed data</h1> (updated on{' '}
         {dashboardStore.dateUpdated})
       </div>
-      <label htmlFor='countrySelector'>
-        Select a country or a few to dive in &amp; compare
-      </label>
-      <Select
-        inputId='countrySelector'
-        options={getCountrySelectOptions(dashboardStore.countries)}
-        isMulti
-        value={countriesToCompare}
-        onChange={(selected) => {
-          setCountriesToCompare(selected as SelectOption[]);
-        }}
-        placeholder="Select countries to compare. Type 'World' for the worldwide data"
-      />
+      {renderCountrySelector(
+        dashboardStore.countries,
+        countriesToCompare,
+        setCountriesToCompare
+      )}
     </div>
+
     {dashboardStore.selectedCountriesCases &&
       renderDataForSelectedCountries(
         'Confirmed cases',
@@ -96,11 +112,11 @@ const renderDashboard = (
   </>
 );
 
-const App: React.FC<Props> = ({ dashboardStore }) => {
+export const Dashboard: React.FC<Props> = ({ dashboardStore }) => {
   const [countriesToCompare, setCountriesToCompare] = useState<SelectOption[]>([
     {
-      value: dashboardStore.WORLD_NAME,
-      label: dashboardStore.WORLD_NAME,
+      value: DashboardStore.WORLD_NAME,
+      label: DashboardStore.WORLD_NAME,
     },
   ]);
 
@@ -119,11 +135,7 @@ const App: React.FC<Props> = ({ dashboardStore }) => {
   return (
     <>
       <div
-        className={`
-        ${styles['col1-320px']}
-        ${styles['col2-768px']}
-        ${styles['col3-1024px']}
-      `}
+        className={`${styles['col1-320px']} ${styles['col2-768px']} ${styles['col3-1024px']}`}
       >
         {dashboardStore.isLoaded &&
           renderDashboard(
@@ -139,4 +151,4 @@ const App: React.FC<Props> = ({ dashboardStore }) => {
 
 export default inject(({ rootStore }: AllStores) => ({
   dashboardStore: rootStore.dashboardStore,
-}))(observer(App));
+}))(observer(Dashboard));

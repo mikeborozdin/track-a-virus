@@ -5,7 +5,7 @@ import getRandomCountryColors from './get-random-colors';
 import CountryColors from '../types/CountryColors';
 
 export default class DashboardStore {
-  public WORLD_NAME = WORLD_NAME;
+  public static WORLD_NAME = WORLD_NAME;
 
   public countries: string[] = null;
 

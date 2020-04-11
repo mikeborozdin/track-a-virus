@@ -4,7 +4,6 @@ module.exports = {
     '\\.(css|less|scss|sss|styl)$': '<rootDir>/node_modules/jest-css-modules',
   },
   setupFilesAfterEnv: ['<rootDir>setupTests.ts'],
-  // collectCoverage: true,
   collectCoverageFrom: [
     '**/*.{ts,tsx}',
     '!**/node_modules/**',
