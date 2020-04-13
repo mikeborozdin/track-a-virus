@@ -64,6 +64,7 @@ const renderCountrySelector = (
       }}
       placeholder="Select countries to compare. Type 'World' for the worldwide data"
       className={styles.select}
+      classNamePrefix='select'
     />
   </>
 );
