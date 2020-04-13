@@ -3,6 +3,7 @@ export interface IDashboardCss {
   'col2-768px': string;
   'col3-1024px': string;
   inline: string;
+  select: string;
   'span-all-col': string;
 }
 

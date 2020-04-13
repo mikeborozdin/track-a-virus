@@ -18,6 +18,14 @@ h1 {
   display: inline;
 }
 
+.select {
+  font-size: 1.35rem;
+}
+
+.select div[class^='select__placeholder'] {
+  font-size: 1rem;
+}
+
 @media only screen and (min-width: 768px) {
   .col2-768px {
     grid-template-columns: repeat(2, 1fr);
@@ -28,6 +36,10 @@ h1 {
 
   h1 {
     font-size: 2rem;
+  }
+
+  .select {
+    font-size: 1rem;
   }
 }
 
