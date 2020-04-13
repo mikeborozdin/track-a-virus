@@ -63,6 +63,7 @@ const renderCountrySelector = (
         setCountriesToCompare(selected as SelectOption[]);
       }}
       placeholder="Select countries to compare. Type 'World' for the worldwide data"
+      className={styles.select}
     />
   </>
 );
