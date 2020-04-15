@@ -90,8 +90,9 @@ const processUsData = (
   results: Papa.ParseResult,
   datesStartsFromIndex: number
 ) => {
-  const rawData = results.data.filter((row) => row['UID']);
-
+  const rawData = results.data
+    .filter((row) => row['UID'])
+    .filter((row) => row['Population'] !== '0');
   let usValues: number[] = [];
 
   for (let i = 0; i < rawData.length - 1; i++) {
@@ -160,6 +161,7 @@ const getDeaths = async () => {
   const timeseries = await getNonUsDeaths();
 
   timeseries.countries[US_COUNTRY_NAME] = await getUsDeaths();
+
   timeseries.countries[WORLD_NAME] = getAggregatedGlobalData(timeseries);
 
   return timeseries;
