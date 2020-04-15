@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import calculateWorldsnapshot from './calculate-world-snapshot';
+import WorldSnapshotGrowthRate from './WorldSnapshotGrowthRate/WorldSnapshotGrowthRate';
 import styles from './WorldSnapshot.css';
 
 interface Props {
@@ -19,15 +20,21 @@ const WorldSnapshot: FC<Props> = ({ cases, deaths }) => {
             <td>{worldSnapshot.totalCases.toLocaleString()}</td>
           </tr>
           <tr>
-            <td>New cases in the last day</td>
-            <td>{worldSnapshot.newCases.toLocaleString()}</td>
+            <td>New cases in last day</td>
+            <td>
+              {worldSnapshot.newCases.toLocaleString()} (
+              <WorldSnapshotGrowthRate
+                growthRate={worldSnapshot.caseGrowthRate}
+              />
+              )
+            </td>
           </tr>
           <tr>
             <td>Total deaths</td>
             <td>{worldSnapshot.totalDeaths.toLocaleString()}</td>
           </tr>
           <tr>
-            <td>New deaths in the last day</td>
+            <td>New deaths in last day</td>
             <td>{worldSnapshot.newDeaths.toLocaleString()}</td>
           </tr>
           <tr>
