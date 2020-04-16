@@ -35,7 +35,13 @@ const WorldSnapshot: FC<Props> = ({ cases, deaths }) => {
           </tr>
           <tr>
             <td>New deaths in last day</td>
-            <td>{worldSnapshot.newDeaths.toLocaleString()}</td>
+            <td>
+              {worldSnapshot.newDeaths.toLocaleString()} (
+              <WorldSnapshotGrowthRate
+                growthRate={worldSnapshot.deathGrowthRate}
+              />
+              )
+            </td>
           </tr>
           <tr>
             <td>Average mortality</td>

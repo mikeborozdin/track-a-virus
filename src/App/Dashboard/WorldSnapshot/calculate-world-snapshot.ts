@@ -32,8 +32,8 @@ const calculateWorldsnapshot = (cases: number[], deaths: number[]) => {
   const caseGrowthRate = calculateGrowthRate(cases);
 
   const totalDeaths = deaths[deaths.length - 1];
-
   const newDeaths = deaths[deaths.length - 1] - deaths[deaths.length - 2];
+  const deathGrowthRate = calculateGrowthRate(deaths);
   const mortality = totalDeaths / totalCases;
 
   return {
@@ -42,6 +42,7 @@ const calculateWorldsnapshot = (cases: number[], deaths: number[]) => {
     caseGrowthRate,
     totalDeaths,
     newDeaths,
+    deathGrowthRate,
     mortality,
   };
 };

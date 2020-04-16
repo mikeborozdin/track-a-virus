@@ -90,9 +90,7 @@ const processUsData = (
   results: Papa.ParseResult,
   datesStartsFromIndex: number
 ) => {
-  const rawData = results.data
-    .filter((row) => row['UID'])
-    .filter((row) => row['Population'] !== '0');
+  const rawData = results.data.filter((row) => row['UID']);
   let usValues: number[] = [];
 
   for (let i = 0; i < rawData.length - 1; i++) {
