@@ -1,4 +1,5 @@
 import { Timeseries } from '../types/Timeseries';
+import calculateVolumesToDifferences from '../shared-calculations/calculate-volumes-to-differences';
 
 const calculateDailyAbsoluteIncrease = (originalData: Timeseries) => {
   const dailyIncrease: Timeseries = {
@@ -7,15 +8,9 @@ const calculateDailyAbsoluteIncrease = (originalData: Timeseries) => {
   };
 
   for (const countryName in originalData.countries) {
-    dailyIncrease.countries[countryName] = originalData.countries[
-      countryName
-    ].map((currentVolume, index, originalCountryData) => {
-      if (index === 0) {
-        return currentVolume;
-      } else {
-        return currentVolume - originalCountryData[index - 1];
-      }
-    });
+    dailyIncrease.countries[countryName] = calculateVolumesToDifferences(
+      originalData.countries[countryName]
+    );
   }
 
   return dailyIncrease;

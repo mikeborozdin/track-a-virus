@@ -2,6 +2,7 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import WorldSnapshot from './WorldSnapshot';
 import calculateWorldSnapshot from './calculate-world-snapshot';
+import WorldSnapshotGrowthRate from './WorldSnapshotGrowthRate/WorldSnapshotGrowthRate';
 
 jest.mock('./calculate-world-snapshot', () => jest.fn());
 
@@ -17,8 +18,10 @@ describe('WorldSnapshot', () => {
     const worldSnapshotData = {
       totalCases: 100,
       newCases: 20,
+      caseGrowthRate: -0.1,
       totalDeaths: 5,
       newDeaths: 1,
+      deathGrowthRate: -0.2,
       mortality: 0.05,
     };
 
@@ -30,8 +33,15 @@ describe('WorldSnapshot', () => {
 
     expect(component.text()).toContain(worldSnapshotData.totalCases);
     expect(component.text()).toContain(worldSnapshotData.newCases);
+    expect(
+      component.find(WorldSnapshotGrowthRate).at(0).prop('growthRate')
+    ).toBe(worldSnapshotData.caseGrowthRate);
+
     expect(component.text()).toContain(worldSnapshotData.totalDeaths);
     expect(component.text()).toContain(worldSnapshotData.newDeaths);
+    expect(
+      component.find(WorldSnapshotGrowthRate).at(1).prop('growthRate')
+    ).toBe(worldSnapshotData.deathGrowthRate);
     expect(component.text()).toContain('5.00%');
   });
 });
