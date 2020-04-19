@@ -7,7 +7,7 @@ import WorldSnapshot from './WorldSnapshot/WorldSnapshot';
 import Select from 'react-select';
 import CumulativeData from './CumulativeData/CumulativeData';
 import DailyAbsoluteIncrease from './DailyAbsoluteIncrease/DailyAbsoluteIncrease';
-import DailyPercentageIncrease from './DailyPercentageIncrease/DailyPercentageIncrease';
+import PercentageTrends from './PercentageTrends/PercentageTrends';
 
 const mockStore = (overrides = {}) =>
   (({
@@ -77,9 +77,13 @@ describe('Dashboard', () => {
 
     const component = shallow(<Dashboard dashboardStore={store} />);
 
-    const dailyCases = component.find(CumulativeData);
-    expect(dailyCases.at(0).prop('data')).toBe(store.selectedCountriesCases);
-    expect(dailyCases.at(1).prop('data')).toBe(store.selectedCountriesDeaths);
+    const cumulativeData = component.find(CumulativeData);
+    expect(cumulativeData.at(0).prop('data')).toBe(
+      store.selectedCountriesCases
+    );
+    expect(cumulativeData.at(1).prop('data')).toBe(
+      store.selectedCountriesDeaths
+    );
 
     const dailyAbsoluteIncrease = component.find(DailyAbsoluteIncrease);
     expect(dailyAbsoluteIncrease.at(0).prop('data')).toBe(
@@ -89,11 +93,11 @@ describe('Dashboard', () => {
       store.selectedCountriesDeaths
     );
 
-    const dailyPercentageIncrease = component.find(DailyPercentageIncrease);
-    expect(dailyPercentageIncrease.at(0).prop('data')).toBe(
+    const percentageTrends = component.find(PercentageTrends);
+    expect(percentageTrends.at(0).prop('data')).toBe(
       store.selectedCountriesCases
     );
-    expect(dailyPercentageIncrease.at(1).prop('data')).toBe(
+    expect(percentageTrends.at(1).prop('data')).toBe(
       store.selectedCountriesDeaths
     );
   });

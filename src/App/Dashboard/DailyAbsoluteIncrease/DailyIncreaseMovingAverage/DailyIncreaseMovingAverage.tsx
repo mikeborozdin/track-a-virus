@@ -7,16 +7,18 @@ import CountryColors from '../../types/CountryColors';
 interface Props {
   data: Timeseries;
   countryColors: CountryColors;
+  movingAvgLength: number;
 }
 
-export const MOVING_AVERAGE_LENGTH = 3;
-
-const DailyIncreaseMovingAverage: FC<Props> = ({ data, countryColors }) => {
+const DailyIncreaseMovingAverage: FC<Props> = ({
+  data,
+  countryColors,
+  movingAvgLength,
+}) => {
   return (
     <>
-      <div>Daily increase - {MOVING_AVERAGE_LENGTH} day moving average</div>
       <LineChart
-        data={calculateDailyIncreaseMovingAverage(data, MOVING_AVERAGE_LENGTH)}
+        data={calculateDailyIncreaseMovingAverage(data, movingAvgLength)}
         countryColors={countryColors}
       />
     </>

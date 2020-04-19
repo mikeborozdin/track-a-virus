@@ -2,7 +2,6 @@ import React, { useEffect, useState, Dispatch, SetStateAction } from 'react';
 import CumulativeData from './CumulativeData/CumulativeData';
 import styles from './Dashboard.css';
 import DailyAbsoluteIncrease from './DailyAbsoluteIncrease/DailyAbsoluteIncrease';
-import DailyPercentageIncrease from './DailyPercentageIncrease/DailyPercentageIncrease';
 import DashboardStore from './stores/DashboardStore';
 import { observer, inject } from 'mobx-react';
 import Select from 'react-select';
@@ -11,6 +10,7 @@ import WorldSnapshot from './WorldSnapshot/WorldSnapshot';
 import LoadingSpinner from './LoadingSpinner/LoadingSpinner';
 import { Timeseries } from './types/Timeseries';
 import CountryColors from './types/CountryColors';
+import PercentageTrends from './PercentageTrends/PercentageTrends';
 
 interface Props {
   dashboardStore?: DashboardStore;
@@ -40,7 +40,7 @@ const renderDataForSelectedCountries = (
       <DailyAbsoluteIncrease data={data} countryColors={countryColors} />
     </div>
     <div>
-      <DailyPercentageIncrease data={data} countryColors={countryColors} />
+      <PercentageTrends data={data} countryColors={countryColors} />
     </div>
   </>
 );

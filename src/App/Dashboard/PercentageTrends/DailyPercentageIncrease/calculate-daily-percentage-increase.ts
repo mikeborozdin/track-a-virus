@@ -1,4 +1,4 @@
-import { Timeseries } from '../types/Timeseries';
+import { Timeseries } from '../../types/Timeseries';
 
 const calculateDailyPercentageIncrease = (originalData: Timeseries) => {
   const dailyIncreasePercentage: Timeseries = {

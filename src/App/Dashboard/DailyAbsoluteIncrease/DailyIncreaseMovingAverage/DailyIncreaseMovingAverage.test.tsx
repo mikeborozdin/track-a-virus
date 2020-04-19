@@ -1,8 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import DailyIncreaseMovingAverage, {
-  MOVING_AVERAGE_LENGTH,
-} from './DailyIncreaseMovingAverage';
+import DailyIncreaseMovingAverage from './DailyIncreaseMovingAverage';
 import { Timeseries } from '../../types/Timeseries';
 import CountryColors from '../../types/CountryColors';
 import LineChart from '../../charts/LineChart/LineChart';
@@ -26,16 +24,19 @@ describe('DailyAbsoluteIncreaseMovingAverage', () => {
       countries: { countryA: [1] },
     };
 
+    const movingAvgLength = 3;
+
     const component = shallow(
       <DailyIncreaseMovingAverage
         data={dataForOneCountry}
         countryColors={COUNTRY_COLORS}
+        movingAvgLength={movingAvgLength}
       />
     );
 
     expect(calculateDailyIncreaseMovingAverageMock).toHaveBeenCalledWith(
       dataForOneCountry,
-      MOVING_AVERAGE_LENGTH
+      movingAvgLength
     );
 
     const lineChart = component.find(LineChart);

@@ -12,6 +12,7 @@ interface Props {
 const CumulativeData: FC<Props> = ({ data, countryColors }) => (
   <>
     <h2 className={commonStyles['component-title']}>Number of cases</h2>
+    <div className={commonStyles['small-toggle-button']}></div>
     <LineChart data={data} countryColors={countryColors} />
   </>
 );
