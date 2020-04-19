@@ -30,7 +30,7 @@ const DailyAbsoluteIncrease: FC<Props> = ({ data, countryColors }) => {
       >
         <ToggleButton
           value='daily'
-          aria-label='left aligned'
+          aria-label='daily'
           classes={{
             sizeSmall: styles['small-toggle-button'],
           }}
@@ -39,7 +39,7 @@ const DailyAbsoluteIncrease: FC<Props> = ({ data, countryColors }) => {
         </ToggleButton>
         <ToggleButton
           value='moving-average'
-          aria-label='centered'
+          aria-label='moving average'
           classes={{
             sizeSmall: styles['small-toggle-button'],
           }}

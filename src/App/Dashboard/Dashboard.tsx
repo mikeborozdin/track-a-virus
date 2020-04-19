@@ -11,7 +11,6 @@ import WorldSnapshot from './WorldSnapshot/WorldSnapshot';
 import LoadingSpinner from './LoadingSpinner/LoadingSpinner';
 import { Timeseries } from './types/Timeseries';
 import CountryColors from './types/CountryColors';
-import DailyIncreaseMovingAverage from './DailyAbsoluteIncrease/DailyIncreaseMovingAverage/DailyIncreaseMovingAverage';
 
 interface Props {
   dashboardStore?: DashboardStore;

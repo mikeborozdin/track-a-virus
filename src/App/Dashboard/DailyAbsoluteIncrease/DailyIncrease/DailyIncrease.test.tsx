@@ -1,10 +1,10 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import DailyAbsoluteIncrease from './DailyAbsoluteIncrease';
-import { Timeseries } from '../types/Timeseries';
-import CountryColors from '../types/CountryColors';
-import BarChart from '../charts/BarChart/BarChart';
-import LineChart from '../charts/LineChart/LineChart';
+import DailyIncrease from './DailyIncrease';
+import { Timeseries } from '../../types/Timeseries';
+import CountryColors from '../../types/CountryColors';
+import BarChart from '../../charts/BarChart/BarChart';
+import LineChart from '../../charts/LineChart/LineChart';
 import calculateAbsoluteDailyIncrease from './calculate-daily-absolute-increase';
 
 jest.mock('./calculate-daily-absolute-increase', () => jest.fn());
@@ -18,7 +18,7 @@ const COUNTRY_COLORS: CountryColors = {
   countryB: 'green',
 };
 
-describe('DailyAbsoluteIncrease', () => {
+describe('DailyIncrease', () => {
   test('Shows bar chart with correct attributes if data just for one country', () => {
     const dataForOneCountry: Timeseries = {
       dates: [new Date()],
@@ -26,10 +26,7 @@ describe('DailyAbsoluteIncrease', () => {
     };
 
     const component = shallow(
-      <DailyAbsoluteIncrease
-        data={dataForOneCountry}
-        countryColors={COUNTRY_COLORS}
-      />
+      <DailyIncrease data={dataForOneCountry} countryColors={COUNTRY_COLORS} />
     );
 
     expect(calculateAbsoluteDailyIncreaseMock).toHaveBeenCalledWith(
@@ -50,7 +47,7 @@ describe('DailyAbsoluteIncrease', () => {
     };
 
     const component = shallow(
-      <DailyAbsoluteIncrease
+      <DailyIncrease
         data={dataForTwoCountries}
         countryColors={COUNTRY_COLORS}
       />
