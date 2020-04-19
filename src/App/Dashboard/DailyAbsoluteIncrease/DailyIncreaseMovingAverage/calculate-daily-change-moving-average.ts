@@ -1,6 +1,6 @@
 import { ma } from 'moving-averages';
-import { Timeseries } from '../types/Timeseries';
-import calculateVolumesToDifferences from '../shared-calculations/calculate-volumes-to-differences';
+import { Timeseries } from '../../types/Timeseries';
+import calculateVolumesToDifferences from '../../shared-calculations/calculate-volumes-to-differences';
 
 const calculateDailyChangeMovingAverage = (
   originalData: Timeseries,

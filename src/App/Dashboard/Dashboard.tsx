@@ -11,7 +11,7 @@ import WorldSnapshot from './WorldSnapshot/WorldSnapshot';
 import LoadingSpinner from './LoadingSpinner/LoadingSpinner';
 import { Timeseries } from './types/Timeseries';
 import CountryColors from './types/CountryColors';
-import DailyChangeMovingAverage from './DailyChangeMovingAverage/DailyChangeMovingAverage';
+import DailyIncreaseMovingAverage from './DailyAbsoluteIncrease/DailyIncreaseMovingAverage/DailyIncreaseMovingAverage';
 
 interface Props {
   dashboardStore?: DashboardStore;
@@ -42,7 +42,6 @@ const renderDataForSelectedCountries = (
     </div>
     <div>
       <DailyPercentageIncrease data={data} countryColors={countryColors} />
-      <DailyChangeMovingAverage data={data} countryColors={countryColors} />
     </div>
   </>
 );
