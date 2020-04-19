@@ -1,4 +1,4 @@
-import { Timeseries } from '../types/Timeseries';
+import { Timeseries } from '../../types/Timeseries';
 import calculateDailyPercentageIncrease from './calculate-daily-percentage-increase';
 
 describe('calculate-daily-percentage-increase', () => {

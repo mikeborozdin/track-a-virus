@@ -1,10 +1,10 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import DailyPercentageIncrease from './DailyPercentageIncrease';
-import { Timeseries } from '../types/Timeseries';
-import CountryColors from '../types/CountryColors';
-import BarChart from '../charts/BarChart/BarChart';
-import LineChart from '../charts/LineChart/LineChart';
+import { Timeseries } from '../../types/Timeseries';
+import CountryColors from '../../types/CountryColors';
+import BarChart from '../../charts/BarChart/BarChart';
+import LineChart from '../../charts/LineChart/LineChart';
 import calculateDailyPercentageIncrease from './calculate-daily-percentage-increase';
 
 jest.mock('./calculate-daily-percentage-increase', () => jest.fn());

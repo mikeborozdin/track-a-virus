@@ -1,9 +1,7 @@
 import calculateVolumesToDifferences from '../shared-calculations/calculate-volumes-to-differences';
+import average from '../shared-calculations/average';
 
 const MOVING_AVERAGE_LENGTH = 3;
-
-const calculateAverage = (input: number[]) =>
-  input.reduce((total, current) => total + current, 0) / input.length;
 
 const calculateGrowthRate = (dailyNumbers: number[]) => {
   // we need to exclude the last day from the moving average
@@ -19,7 +17,7 @@ const calculateGrowthRate = (dailyNumbers: number[]) => {
   ).slice(1);
 
   // finally the last day is not used in calculating the moving average
-  const movingAverage = calculateAverage(
+  const movingAverage = average(
     dailyIncreases.slice(0, dailyIncreases.length - 1)
   );
 
