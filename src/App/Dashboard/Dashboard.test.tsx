@@ -5,7 +5,7 @@ import LoadingSpinner from './LoadingSpinner/LoadingSpinner';
 import DashboardStore from './stores/DashboardStore';
 import WorldSnapshot from './WorldSnapshot/WorldSnapshot';
 import Select from 'react-select';
-import DailyCases from './DailyData/DailyData';
+import CumulativeData from './CumulativeData/CumulativeData';
 import DailyAbsoluteIncrease from './DailyAbsoluteIncrease/DailyAbsoluteIncrease';
 import DailyPercentageIncrease from './DailyPercentageIncrease/DailyPercentageIncrease';
 
@@ -77,7 +77,7 @@ describe('Dashboard', () => {
 
     const component = shallow(<Dashboard dashboardStore={store} />);
 
-    const dailyCases = component.find(DailyCases);
+    const dailyCases = component.find(CumulativeData);
     expect(dailyCases.at(0).prop('data')).toBe(store.selectedCountriesCases);
     expect(dailyCases.at(1).prop('data')).toBe(store.selectedCountriesDeaths);
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, Dispatch, SetStateAction } from 'react';
-import DailyCases from './DailyData/DailyData';
+import CumulativeData from './CumulativeData/CumulativeData';
 import styles from './Dashboard.css';
 import DailyAbsoluteIncrease from './DailyAbsoluteIncrease/DailyAbsoluteIncrease';
 import DailyPercentageIncrease from './DailyPercentageIncrease/DailyPercentageIncrease';
@@ -34,7 +34,7 @@ const renderDataForSelectedCountries = (
       <h1>{title}</h1>
     </div>
     <div>
-      <DailyCases data={data} countryColors={countryColors} />
+      <CumulativeData data={data} countryColors={countryColors} />
     </div>
     <div>
       <DailyAbsoluteIncrease data={data} countryColors={countryColors} />

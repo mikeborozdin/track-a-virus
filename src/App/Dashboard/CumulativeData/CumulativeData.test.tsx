@@ -1,11 +1,11 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import DailyData from './DailyData';
+import DailyData from './CumulativeData';
 import { Timeseries } from '../types/Timeseries';
 import CountryColors from '../types/CountryColors';
 import LineChart from '../charts/LineChart/LineChart';
 
-describe('DailyData', () => {
+describe('CumulativeData', () => {
   test('Shows line chart with correct attributes', () => {
     const data: Timeseries = {
       dates: [new Date()],

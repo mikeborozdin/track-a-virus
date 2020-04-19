@@ -9,11 +9,11 @@ interface Props {
   countryColors: CountryColors;
 }
 
-const DailyCases: FC<Props> = ({ data, countryColors }) => (
+const CumulativeData: FC<Props> = ({ data, countryColors }) => (
   <>
     <h2 className={commonStyles['component-title']}>Number of cases</h2>
     <LineChart data={data} countryColors={countryColors} />
   </>
 );
 
-export default DailyCases;
+export default CumulativeData;
