@@ -2,9 +2,7 @@ import { Timeseries } from '../../types/Timeseries';
 import calculateVolumesToDifferences from '../../shared-calculations/calculate-volumes-to-differences';
 import average from '../../shared-calculations/average';
 
-const MOVING_AVG_LENGTH = 7;
-
-const calcCountryMovingAvgDiff = (data: Timeseries) => {
+const calcCountryMovingAvgDiff = (data: Timeseries, periodLength: number) => {
   const result: Record<string, number> = {};
 
   for (const countryName in data.countries) {
@@ -14,13 +12,13 @@ const calcCountryMovingAvgDiff = (data: Timeseries) => {
 
     const previousMovingAvg = average(
       dailyDifferences.slice(
-        dailyDifferences.length - MOVING_AVG_LENGTH * 2,
-        dailyDifferences.length - MOVING_AVG_LENGTH
+        dailyDifferences.length - periodLength * 2,
+        dailyDifferences.length - periodLength
       )
     );
 
     const currentMovingAvg = average(
-      dailyDifferences.slice(dailyDifferences.length - MOVING_AVG_LENGTH)
+      dailyDifferences.slice(dailyDifferences.length - periodLength)
     );
 
     result[countryName] = currentMovingAvg / previousMovingAvg - 1;

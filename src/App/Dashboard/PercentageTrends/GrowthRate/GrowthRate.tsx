@@ -9,8 +9,13 @@ interface Props {
   countryColors: CountryColors;
 }
 
+export const GROWTH_RATE_PERIOD = 7;
+
 const GrowthRate: FC<Props> = ({ data, countryColors }) => {
-  const growthRateByCountry = calcCountryMovingAvgDiff(data);
+  const growthRateByCountry = calcCountryMovingAvgDiff(
+    data,
+    GROWTH_RATE_PERIOD
+  );
 
   return (
     <>
