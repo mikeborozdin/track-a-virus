@@ -3,6 +3,7 @@ import BarChart from '../charts/BarChart/BarChart';
 import LineChart from '../charts/LineChart/LineChart';
 import { Timeseries } from '../types/Timeseries';
 import calculateDailyPercentageIncrease from './calculate-daily-percentage-increase';
+import commonStyles from '../styles/common-dashboard-styles.css';
 
 interface Props {
   data: Timeseries;
@@ -45,7 +46,7 @@ const DailyPercentageIncrease: FC<Props> = ({ data, countryColors }) => {
 
   return (
     <>
-      <div>Daily increase %</div>
+      <h2 className={commonStyles['component-title']}>Daily increase %</h2>
       <Chart
         data={calculateDailyPercentageIncrease(data)}
         countryColors={countryColors}
