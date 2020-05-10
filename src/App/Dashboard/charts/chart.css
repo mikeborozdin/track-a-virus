@@ -1,0 +1,15 @@
+/* @media (orientation: portrait) {
+  .chart-container {
+    min-height: 5vh;
+  }
+}
+
+@media (orientation: landscape) {
+  .chart-container {
+    min-height: 10vh;
+  }
+} */
+
+.chart-container > canvas {
+  width: 100% !important;
+}

@@ -2,6 +2,7 @@ import React, { FC, useEffect, useRef, useState } from 'react';
 import Chart, { ChartOptions } from 'chart.js';
 import { Timeseries } from '../../types/Timeseries';
 import CountryColors from '../../types/CountryColors';
+import styles from '../chart.css';
 
 interface Props {
   data: Timeseries;
@@ -27,6 +28,7 @@ const getCountryDataForChartJs = (
 };
 
 const getChartOptions = (): Chart.ChartOptions => ({
+  responsive: true,
   scales: {
     xAxes: [
       {
@@ -85,7 +87,11 @@ const LineChart: FC<Props> = ({ data, countryColors, chartOptions }) => {
     }
   }, [data]);
 
-  return <canvas ref={chartRef} />;
+  return (
+    <div className={styles['chart-container']}>
+      <canvas ref={chartRef} />
+    </div>
+  );
 };
 
 export default LineChart;

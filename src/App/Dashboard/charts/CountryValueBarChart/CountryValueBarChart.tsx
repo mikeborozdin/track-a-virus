@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
 import Chart, { ChartOptions } from 'chart.js';
 import CountryColors from '../../types/CountryColors';
+import styles from '../chart.css';
 
 interface Props {
   data: Record<string, number>;
@@ -97,7 +98,11 @@ const CountryValueBarChart: FC<Props> = ({
     }
   }, [data]);
 
-  return <canvas ref={chartRef} />;
+  return (
+    <div className={styles['chart-container']}>
+      <canvas ref={chartRef} />
+    </div>
+  );
 };
 
 export default CountryValueBarChart;
