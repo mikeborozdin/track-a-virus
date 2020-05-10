@@ -11,3 +11,7 @@
   height: 100%;
   background: #fff;
 }
+
+.full-screen canvas {
+  height: 90% !important;
+}

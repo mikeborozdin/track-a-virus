@@ -34,9 +34,7 @@ const getChartOptions = (
 
   return {
     responsive: true,
-    maintainAspectRatio: true,
     onClick: () => {
-      console.log('onlclick');
       isFullScreen = !isFullScreen;
       toggleFullScreen(isFullScreen);
     },
@@ -77,7 +75,6 @@ const BarChart: FC<Props> = ({ data, countryColors, chartOptions }) => {
   const chartRef = useRef(null);
 
   const toggleFullScreen = (newState: boolean) => {
-    console.log(newState);
     setFullScreen(newState);
   };
 

@@ -6,6 +6,7 @@ import CountryColors from '../types/CountryColors';
 import DailyIncrease from './DailyIncrease/DailyIncrease';
 import DailyIncreaseMovingAverage from './DailyIncreaseMovingAverage/DailyIncreaseMovingAverage';
 import commonStyles from '../styles/common-dashboard-styles.css';
+import styles from '../charts/chart.css';
 
 interface Props {
   data: Timeseries;
@@ -23,9 +24,10 @@ const getTitle = (chartType: ChartType) =>
 
 const DailyAbsoluteIncrease: FC<Props> = ({ data, countryColors }) => {
   const [chartType, setChartType] = useState<ChartType>('daily');
+  const [isFullScreen, setFullScreen] = useState<boolean>(false);
 
   return (
-    <>
+    <div className={`${isFullScreen ? styles['full-screen'] : ''}`}>
       <h2 className={commonStyles['component-title']}>{getTitle(chartType)}</h2>
       <ToggleButtonGroup
         value={chartType}
@@ -52,8 +54,10 @@ const DailyAbsoluteIncrease: FC<Props> = ({ data, countryColors }) => {
         >
           Moving Average
         </ToggleButton>
+        <button onClick={() => setFullScreen(!isFullScreen)}>
+          Toggle full screen
+        </button>
       </ToggleButtonGroup>
-
       {chartType === 'daily' && (
         <DailyIncrease data={data} countryColors={countryColors} />
       )}
@@ -64,7 +68,7 @@ const DailyAbsoluteIncrease: FC<Props> = ({ data, countryColors }) => {
           movingAvgLength={MOVING_AVG_LENGTH}
         />
       )}
-    </>
+    </div>
   );
 };
 
