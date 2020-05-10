@@ -27,41 +27,59 @@ const getCountryDataForChartJs = (
   return chartDatasets;
 };
 
-const getChartOptions = (): Chart.ChartOptions => ({
-  responsive: true,
-  scales: {
-    xAxes: [
-      {
-        type: 'time',
-        time: {
-          unit: 'day',
-        },
-      },
-    ],
-    yAxes: [
-      {
-        ticks: {
-          callback: (value) =>
-            parseInt(value.toString()).toLocaleString('en-gb'),
-        },
-      },
-    ],
-  },
-  tooltips: {
-    callbacks: {
-      title: (item) =>
-        item[0].label.substring(0, item[0].label.lastIndexOf(', ')),
-      label: (item, data) =>
-        `${data.datasets[item.datasetIndex].label}: ${parseInt(
-          item.value
-        ).toLocaleString('en-gb')}`,
+const getChartOptions = (
+  toggleFullScreen: (newState: boolean) => void
+): Chart.ChartOptions => {
+  let isFullScreen = false;
+
+  return {
+    responsive: true,
+    maintainAspectRatio: true,
+    onClick: () => {
+      console.log('onlclick');
+      isFullScreen = !isFullScreen;
+      toggleFullScreen(isFullScreen);
     },
-  },
-});
+    scales: {
+      xAxes: [
+        {
+          type: 'time',
+          time: {
+            unit: 'day',
+          },
+        },
+      ],
+      yAxes: [
+        {
+          ticks: {
+            callback: (value) =>
+              parseInt(value.toString()).toLocaleString('en-gb'),
+          },
+        },
+      ],
+    },
+    tooltips: {
+      callbacks: {
+        title: (item) =>
+          item[0].label.substring(0, item[0].label.lastIndexOf(', ')),
+        label: (item, data) =>
+          `${data.datasets[item.datasetIndex].label}: ${parseInt(
+            item.value
+          ).toLocaleString('en-gb')}`,
+      },
+    },
+  };
+};
 
 const BarChart: FC<Props> = ({ data, countryColors, chartOptions }) => {
   const [chart, setChart] = useState<Chart>(null);
+  const [isFullScreen, setFullScreen] = useState<boolean>(false);
   const chartRef = useRef(null);
+
+  const toggleFullScreen = (newState: boolean) => {
+    console.log(newState);
+    setFullScreen(newState);
+  };
 
   useEffect(() => {
     if (chartRef.current) {
@@ -74,7 +92,10 @@ const BarChart: FC<Props> = ({ data, countryColors, chartOptions }) => {
               labels: data.dates,
               datasets: getCountryDataForChartJs(data, countryColors),
             },
-            options: { ...getChartOptions(), ...chartOptions },
+            options: {
+              ...getChartOptions(toggleFullScreen),
+              ...chartOptions,
+            },
           })
         );
       } else {
@@ -88,7 +109,11 @@ const BarChart: FC<Props> = ({ data, countryColors, chartOptions }) => {
   }, [data]);
 
   return (
-    <div className={styles['chart-container']}>
+    <div
+      className={`${styles['chart-container']} ${
+        isFullScreen ? styles['full-screen'] : ''
+      }`}
+    >
       <canvas ref={chartRef} />
     </div>
   );
