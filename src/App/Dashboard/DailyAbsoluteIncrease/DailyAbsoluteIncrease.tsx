@@ -41,6 +41,7 @@ const DailyAbsoluteIncrease: FC<Props> = ({ data, countryColors }) => {
             aria-label='daily'
             classes={{
               sizeSmall: commonStyles['small-toggle-button'],
+              label: commonStyles['small-toggle-label'],
             }}
           >
             Daily
@@ -50,6 +51,7 @@ const DailyAbsoluteIncrease: FC<Props> = ({ data, countryColors }) => {
             aria-label='moving average'
             classes={{
               sizeSmall: commonStyles['small-toggle-button'],
+              label: commonStyles['small-toggle-label'],
             }}
           >
             Moving Average

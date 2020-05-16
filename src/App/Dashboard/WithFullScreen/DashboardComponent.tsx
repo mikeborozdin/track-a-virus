@@ -1,6 +1,9 @@
 import React, { FC, useState, ReactElement } from 'react';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
 import styles from '../charts/chart.css';
 import commonStyles from '../styles/common-dashboard-styles.css';
+import { Button } from '@material-ui/core';
 
 interface Props {
   title: string;
@@ -22,12 +25,18 @@ const DashboardComponent: FC<Props> = ({ title, children, buttons }) => {
         }`}
       >
         {buttons}
-        <button
+
+        <Button
+          variant='outlined'
           onClick={() => setFullScreen(!isFullScreen)}
-          className={commonStyles['toggle-full-screen']}
+          size='small'
+          classes={{
+            sizeSmall: commonStyles['small-toggle-button'],
+            label: commonStyles['small-toggle-label'],
+          }}
         >
           Toggle full screen
-        </button>
+        </Button>
       </div>
       {children}
     </div>
