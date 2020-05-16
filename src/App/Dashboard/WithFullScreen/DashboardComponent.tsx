@@ -1,6 +1,4 @@
 import React, { FC, useState, ReactElement } from 'react';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
 import styles from '../charts/chart.css';
 import commonStyles from '../styles/common-dashboard-styles.css';
 import { Button } from '@material-ui/core';
