@@ -6,7 +6,6 @@ import CountryColors from '../types/CountryColors';
 import DailyIncrease from './DailyIncrease/DailyIncrease';
 import DailyIncreaseMovingAverage from './DailyIncreaseMovingAverage/DailyIncreaseMovingAverage';
 import commonStyles from '../styles/common-dashboard-styles.css';
-import styles from '../charts/chart.css';
 import DashboardComponent from '../WithFullScreen/DashboardComponent';
 
 interface Props {
