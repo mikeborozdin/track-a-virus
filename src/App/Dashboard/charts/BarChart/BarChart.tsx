@@ -29,6 +29,7 @@ const getCountryDataForChartJs = (
 
 const getChartOptions = (): Chart.ChartOptions => ({
   responsive: true,
+  maintainAspectRatio: true,
   scales: {
     xAxes: [
       {

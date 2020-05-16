@@ -12,6 +12,8 @@
   background: #fff;
 }
 
-.full-screen canvas {
-  height: 90% !important;
+@media (orientation: landscape) {
+  .full-screen canvas {
+    height: 75% !important;
+  }
 }
