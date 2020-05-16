@@ -15,5 +15,6 @@
 @media (orientation: landscape) {
   .full-screen canvas {
     height: 75% !important;
+    width: 95% !important;
   }
 }

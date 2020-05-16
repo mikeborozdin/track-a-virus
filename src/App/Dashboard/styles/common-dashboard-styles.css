@@ -19,7 +19,7 @@
 }
 
 .right-align {
-  justify-content: fle;
+  justify-content: flex-end;
 }
 
 .toggle-full-screen {
