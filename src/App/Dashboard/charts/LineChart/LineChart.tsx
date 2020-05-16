@@ -27,18 +27,10 @@ const getCountryDataForChartJs = (
   return chartDatasets;
 };
 
-const getChartOptions = (
-  toggleFullScreen: (newState: boolean) => void
-): Chart.ChartOptions => {
-  let isFullScreen = false;
-
+const getChartOptions = (): Chart.ChartOptions => {
   return {
     responsive: true,
     maintainAspectRatio: true,
-    onClick: () => {
-      isFullScreen = !isFullScreen;
-      toggleFullScreen(isFullScreen);
-    },
     scales: {
       xAxes: [
         {
@@ -72,12 +64,7 @@ const getChartOptions = (
 
 const LineChart: FC<Props> = ({ data, countryColors, chartOptions }) => {
   const [chart, setChart] = useState<Chart>(null);
-  const [isFullScreen, setFullScreen] = useState<boolean>(false);
   const chartRef = useRef(null);
-
-  const toggleFullScreen = (newState: boolean) => {
-    setFullScreen(newState);
-  };
 
   useEffect(() => {
     if (chartRef.current) {
@@ -90,7 +77,7 @@ const LineChart: FC<Props> = ({ data, countryColors, chartOptions }) => {
               labels: data.dates,
               datasets: getCountryDataForChartJs(data, countryColors),
             },
-            options: { ...getChartOptions(toggleFullScreen), ...chartOptions },
+            options: { ...getChartOptions(), ...chartOptions },
           })
         );
       } else {
@@ -104,14 +91,7 @@ const LineChart: FC<Props> = ({ data, countryColors, chartOptions }) => {
   }, [data]);
 
   return (
-    <div
-      className={`${styles['chart-container']} ${
-        isFullScreen ? styles['full-screen'] : ''
-      }`}
-    >
-      <button onClick={() => setFullScreen(!isFullScreen)}>
-        Toggle full screen
-      </button>
+    <div className={styles['chart-container']}>
       <canvas ref={chartRef} />
     </div>
   );

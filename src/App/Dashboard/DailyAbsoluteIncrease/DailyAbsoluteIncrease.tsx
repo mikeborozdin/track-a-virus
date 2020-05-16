@@ -7,6 +7,7 @@ import DailyIncrease from './DailyIncrease/DailyIncrease';
 import DailyIncreaseMovingAverage from './DailyIncreaseMovingAverage/DailyIncreaseMovingAverage';
 import commonStyles from '../styles/common-dashboard-styles.css';
 import styles from '../charts/chart.css';
+import DashboardComponent from '../WithFullScreen/DashboardComponent';
 
 interface Props {
   data: Timeseries;
@@ -24,40 +25,39 @@ const getTitle = (chartType: ChartType) =>
 
 const DailyAbsoluteIncrease: FC<Props> = ({ data, countryColors }) => {
   const [chartType, setChartType] = useState<ChartType>('daily');
-  const [isFullScreen, setFullScreen] = useState<boolean>(false);
 
   return (
-    <div className={`${isFullScreen ? styles['full-screen'] : ''}`}>
-      <h2 className={commonStyles['component-title']}>{getTitle(chartType)}</h2>
-      <ToggleButtonGroup
-        value={chartType}
-        exclusive
-        onChange={(_e, value) => value && setChartType(value)}
-        size='small'
-        aria-label='chart type'
-      >
-        <ToggleButton
-          value='daily'
-          aria-label='daily'
-          classes={{
-            sizeSmall: commonStyles['small-toggle-button'],
-          }}
+    <DashboardComponent
+      title={getTitle(chartType)}
+      buttons={
+        <ToggleButtonGroup
+          value={chartType}
+          exclusive
+          onChange={(_e, value) => value && setChartType(value)}
+          size='small'
+          aria-label='chart type'
         >
-          Daily
-        </ToggleButton>
-        <ToggleButton
-          value='moving-average'
-          aria-label='moving average'
-          classes={{
-            sizeSmall: commonStyles['small-toggle-button'],
-          }}
-        >
-          Moving Average
-        </ToggleButton>
-        <button onClick={() => setFullScreen(!isFullScreen)}>
-          Toggle full screen
-        </button>
-      </ToggleButtonGroup>
+          <ToggleButton
+            value='daily'
+            aria-label='daily'
+            classes={{
+              sizeSmall: commonStyles['small-toggle-button'],
+            }}
+          >
+            Daily
+          </ToggleButton>
+          <ToggleButton
+            value='moving-average'
+            aria-label='moving average'
+            classes={{
+              sizeSmall: commonStyles['small-toggle-button'],
+            }}
+          >
+            Moving Average
+          </ToggleButton>
+        </ToggleButtonGroup>
+      }
+    >
       {chartType === 'daily' && (
         <DailyIncrease data={data} countryColors={countryColors} />
       )}
@@ -68,7 +68,7 @@ const DailyAbsoluteIncrease: FC<Props> = ({ data, countryColors }) => {
           movingAvgLength={MOVING_AVG_LENGTH}
         />
       )}
-    </div>
+    </DashboardComponent>
   );
 };
 

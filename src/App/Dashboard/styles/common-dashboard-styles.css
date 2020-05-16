@@ -3,13 +3,35 @@
 }
 
 .component-title {
+  margin-bottom: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.component-title > h2 {
   font-size: 0.8rem;
   font-weight: bold;
-  margin-bottom: 0;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.right-align {
+  justify-content: fle;
+}
+
+.toggle-full-screen {
+  justify-self: flex-end;
 }
 
 .small-toggle-button {
   height: var(--toggles-height) !important;
+}
+
+.small-toggle-label {
+  font-size: 0.6rem;
 }
 
 .no-toggle-buttons-spacer {
