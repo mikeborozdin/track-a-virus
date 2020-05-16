@@ -16,7 +16,7 @@ interface Props {
 
 type ChartType = 'daily' | 'moving-average';
 
-const MOVING_AVG_LENGTH = 3;
+const MOVING_AVG_LENGTH = 7;
 
 const getTitle = (chartType: ChartType) =>
   chartType === 'daily'
