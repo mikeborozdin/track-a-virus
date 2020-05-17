@@ -6,31 +6,39 @@ import CountryColors from '../types/CountryColors';
 import commonStyles from '../styles/common-dashboard-styles.css';
 import GrowthRate from './GrowthRate/GrowthRate';
 import DailyPercentageIncrease from './DailyPercentageIncrease/DailyPercentageIncrease';
-import DashboardComponent from '../WithFullScreen/DashboardComponent';
+import DashboardComponent, {
+  DashboardComponentButtons,
+  DashboardComponentContent,
+} from '../WithFullScreen/DashboardComponent';
 
 interface Props {
+  title: string;
   data: Timeseries;
   countryColors: CountryColors;
 }
 
 type ChartType = 'growth-rate' | 'percentage-increase';
 
-const getTitle = (chartType: ChartType) =>
+const getTitle = (titlePrefix: string, chartType: ChartType) =>
   chartType === 'growth-rate'
-    ? 'Growth rate (week on week)'
-    : `Daily increase % (of existing cases)`;
+    ? `${titlePrefix}: growth rate (week on week)`
+    : `${titlePrefix}: daily increase % (of existing cases)`;
 
-const PercentageTrends: FC<Props> = ({ data, countryColors }) => {
+const PercentageTrends: FC<Props> = ({ title, data, countryColors }) => {
   const [chartType, setChartType] = useState<ChartType>('growth-rate');
 
+  console.log('RENDER', chartType);
+
   return (
-    <DashboardComponent
-      title={getTitle(chartType)}
-      buttons={
+    <DashboardComponent title={getTitle(title, chartType)}>
+      <DashboardComponentButtons>
         <ToggleButtonGroup
           value={chartType}
           exclusive
-          onChange={(_e, value) => value && setChartType(value)}
+          onChange={(_e, value) => {
+            console.log('!!! on change', value);
+            value && setChartType(value);
+          }}
           size='small'
           aria-label='chart type'
         >
@@ -55,14 +63,16 @@ const PercentageTrends: FC<Props> = ({ data, countryColors }) => {
             Percentage Increase
           </ToggleButton>
         </ToggleButtonGroup>
-      }
-    >
-      {chartType === 'growth-rate' && (
-        <GrowthRate data={data} countryColors={countryColors} />
-      )}
-      {chartType === 'percentage-increase' && (
-        <DailyPercentageIncrease data={data} countryColors={countryColors} />
-      )}
+      </DashboardComponentButtons>
+
+      <DashboardComponentContent>
+        {chartType === 'growth-rate' && (
+          <GrowthRate data={data} countryColors={countryColors} />
+        )}
+        {chartType === 'percentage-increase' && (
+          <DailyPercentageIncrease data={data} countryColors={countryColors} />
+        )}
+      </DashboardComponentContent>
     </DashboardComponent>
   );
 };

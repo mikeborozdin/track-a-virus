@@ -34,13 +34,25 @@ const renderDataForSelectedCountries = (
       <h1>{title}</h1>
     </div>
     <div>
-      <CumulativeData data={data} countryColors={countryColors} />
+      <CumulativeData
+        title={`${title}: total number`}
+        data={data}
+        countryColors={countryColors}
+      />
     </div>
     <div>
-      <DailyAbsoluteIncrease data={data} countryColors={countryColors} />
+      <DailyAbsoluteIncrease
+        title={`${title}: daily increase`}
+        data={data}
+        countryColors={countryColors}
+      />
     </div>
     <div>
-      <PercentageTrends data={data} countryColors={countryColors} />
+      <PercentageTrends
+        title={`${title}`}
+        data={data}
+        countryColors={countryColors}
+      />
     </div>
   </>
 );

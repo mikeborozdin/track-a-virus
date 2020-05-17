@@ -12,6 +12,8 @@ const COUNTRY_COLORS: CountryColors = {
   countryB: 'green',
 };
 
+const TITLE = 'some title';
+
 describe('DailyAbsoluteIncrease', () => {
   test('Shows a chart type toggle with default options of [daily]', () => {
     const dataForOneCountry: Timeseries = {
@@ -21,6 +23,7 @@ describe('DailyAbsoluteIncrease', () => {
 
     const component = shallow(
       <DailyAbsoluteIncrease
+        title={TITLE}
         data={dataForOneCountry}
         countryColors={COUNTRY_COLORS}
       />
@@ -40,6 +43,7 @@ describe('DailyAbsoluteIncrease', () => {
 
     const component = shallow(
       <DailyAbsoluteIncrease
+        title={TITLE}
         data={dataForOneCountry}
         countryColors={COUNTRY_COLORS}
       />

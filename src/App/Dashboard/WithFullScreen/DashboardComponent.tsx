@@ -3,14 +3,39 @@ import styles from '../charts/chart.css';
 import commonStyles from '../styles/common-dashboard-styles.css';
 import { Button } from '@material-ui/core';
 
+export const DashboardComponentButtons: FC = ({ children }) => <>{children}</>;
+export const DashboardComponentContent: FC = ({ children }) => <>{children}</>;
+
 interface Props {
   title: string;
-  children: ReactElement[];
-  buttons?: ReactElement;
+  // children: ReactElement[];
+  children:
+    | ReactElement<
+        typeof DashboardComponentContent | typeof DashboardComponentButtons
+      >[]
+    | ReactElement<typeof DashboardComponentContent>;
+  // children:
+  //   | ReactElement<
+  //       unknown,
+  //       'DashboardComponentButtons' | 'DashboardComponentContent'
+  //     >[]
+  //   | ReactElement<unknown, 'DashboardComponentContent'>;
 }
 
-const DashboardComponent: FC<Props> = ({ title, children, buttons }) => {
+const DashboardComponent: FC<Props> = ({ title, children }) => {
   const [isFullScreen, setFullScreen] = useState<boolean>(false);
+
+  let buttons = null;
+  let content = null;
+
+  if (Array.isArray(children)) {
+    buttons = children.filter((c) => c.type === DashboardComponentButtons)[0];
+    content = children.filter((c) => c.type === DashboardComponentContent)[0];
+
+    console.log(children);
+  } else {
+    content = children;
+  }
 
   return (
     <div className={`${isFullScreen ? styles['full-screen'] : ''}`}>
@@ -36,7 +61,7 @@ const DashboardComponent: FC<Props> = ({ title, children, buttons }) => {
           Toggle full screen
         </Button>
       </div>
-      {children}
+      {content}
     </div>
   );
 };
