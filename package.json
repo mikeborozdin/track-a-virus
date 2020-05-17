@@ -9,7 +9,8 @@
     "test:coverage": "jest --coverage",
     "build": "npm run pre-build-checks && webpack --mode=production --env=production",
     "prettier": "prettier ./src -c",
-    "pre-build-checks": "npm run lint && npm run prettier"
+    "typecheck": "tsc --noEmit",
+    "pre-build-checks": "npm test && npm run typecheck && npm run lint && npm run prettier"
   },
   "keywords": [],
   "author": "Mike Borozdin <mike.borozdin@gmail.com>",
