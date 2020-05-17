@@ -14,12 +14,10 @@ const DailyIncrease: FC<Props> = ({ data, countryColors }) => {
   const Chart = Object.keys(data.countries).length > 1 ? LineChart : BarChart;
 
   return (
-    <>
-      <Chart
-        data={calculateDailyAbsoluteIncrease(data)}
-        countryColors={countryColors}
-      />
-    </>
+    <Chart
+      data={calculateDailyAbsoluteIncrease(data)}
+      countryColors={countryColors}
+    />
   );
 };
 

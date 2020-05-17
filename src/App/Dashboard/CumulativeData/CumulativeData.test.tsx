@@ -5,6 +5,8 @@ import { Timeseries } from '../types/Timeseries';
 import CountryColors from '../types/CountryColors';
 import LineChart from '../charts/LineChart/LineChart';
 
+const title = 'SOME TITLE';
+
 describe('CumulativeData', () => {
   test('Shows line chart with correct attributes', () => {
     const data: Timeseries = {
@@ -17,7 +19,7 @@ describe('CumulativeData', () => {
     };
 
     const component = shallow(
-      <DailyData data={data} countryColors={countryColors} />
+      <DailyData title={title} data={data} countryColors={countryColors} />
     );
 
     const lineChart = component.find(LineChart);

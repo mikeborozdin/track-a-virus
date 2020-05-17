@@ -2,23 +2,10 @@
   --toggles-height: 2rem;
 }
 
-.component-title {
-  font-size: 0.8rem;
-  font-weight: bold;
-  margin-bottom: 0;
-}
-
 .small-toggle-button {
   height: var(--toggles-height) !important;
 }
 
-.no-toggle-buttons-spacer {
-  display: none;
-}
-
-@media only screen and (min-width: 768px) {
-  .no-toggle-buttons-spacer {
-    display: block;
-    height: var(--toggles-height);
-  }
+.small-toggle-label {
+  font-size: 0.6rem;
 }

@@ -1,0 +1,38 @@
+.full-screen {
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background: #fff;
+  padding: 1rem;
+}
+
+.component-title {
+  margin-bottom: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.component-title > h2 {
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.right-align {
+  justify-content: flex-end;
+}
+
+@media (orientation: landscape) {
+  .full-screen canvas {
+    height: 80% !important;
+    width: 95% !important;
+  }
+}

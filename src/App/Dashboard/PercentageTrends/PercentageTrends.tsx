@@ -6,59 +6,71 @@ import CountryColors from '../types/CountryColors';
 import commonStyles from '../styles/common-dashboard-styles.css';
 import GrowthRate from './GrowthRate/GrowthRate';
 import DailyPercentageIncrease from './DailyPercentageIncrease/DailyPercentageIncrease';
+import DashboardComponent, {
+  DashboardComponentButtons,
+  DashboardComponentContent,
+} from '../DashboardComponent/DashboardComponent';
 
 interface Props {
+  title: string;
   data: Timeseries;
   countryColors: CountryColors;
 }
 
 type ChartType = 'growth-rate' | 'percentage-increase';
 
-const getTitle = (chartType: ChartType) =>
+const getTitle = (titlePrefix: string, chartType: ChartType) =>
   chartType === 'growth-rate'
-    ? 'Growth rate (week on week)'
-    : `Daily increase % (of existing cases)`;
+    ? `${titlePrefix}: growth rate (week on week)`
+    : `${titlePrefix}: daily increase % (of existing cases)`;
 
-const PercentageTrends: FC<Props> = ({ data, countryColors }) => {
+const PercentageTrends: FC<Props> = ({ title, data, countryColors }) => {
   const [chartType, setChartType] = useState<ChartType>('growth-rate');
 
   return (
-    <>
-      <h2 className={commonStyles['component-title']}>{getTitle(chartType)}</h2>
-      <ToggleButtonGroup
-        value={chartType}
-        exclusive
-        onChange={(_e, value) => value && setChartType(value)}
-        size='small'
-        aria-label='chart type'
-      >
-        <ToggleButton
-          value='growth-rate'
-          aria-label='growth-rate'
-          classes={{
-            sizeSmall: commonStyles['small-toggle-button'],
+    <DashboardComponent title={getTitle(title, chartType)}>
+      <DashboardComponentButtons>
+        <ToggleButtonGroup
+          value={chartType}
+          exclusive
+          onChange={(_e, value) => {
+            value && setChartType(value);
           }}
+          size='small'
+          aria-label='chart type'
         >
-          Growth rate
-        </ToggleButton>
-        <ToggleButton
-          value='percentage-increase'
-          aria-label='percentage-increase'
-          classes={{
-            sizeSmall: commonStyles['small-toggle-button'],
-          }}
-        >
-          Percentage Increase
-        </ToggleButton>
-      </ToggleButtonGroup>
+          <ToggleButton
+            value='growth-rate'
+            aria-label='growth-rate'
+            classes={{
+              sizeSmall: commonStyles['small-toggle-button'],
+              label: commonStyles['small-toggle-label'],
+            }}
+          >
+            Growth rate
+          </ToggleButton>
+          <ToggleButton
+            value='percentage-increase'
+            aria-label='percentage-increase'
+            classes={{
+              sizeSmall: commonStyles['small-toggle-button'],
+              label: commonStyles['small-toggle-label'],
+            }}
+          >
+            Percentage Increase
+          </ToggleButton>
+        </ToggleButtonGroup>
+      </DashboardComponentButtons>
 
-      {chartType === 'growth-rate' && (
-        <GrowthRate data={data} countryColors={countryColors} />
-      )}
-      {chartType === 'percentage-increase' && (
-        <DailyPercentageIncrease data={data} countryColors={countryColors} />
-      )}
-    </>
+      <DashboardComponentContent>
+        {chartType === 'growth-rate' && (
+          <GrowthRate data={data} countryColors={countryColors} />
+        )}
+        {chartType === 'percentage-increase' && (
+          <DailyPercentageIncrease data={data} countryColors={countryColors} />
+        )}
+      </DashboardComponentContent>
+    </DashboardComponent>
   );
 };
 
