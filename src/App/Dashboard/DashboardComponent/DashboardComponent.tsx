@@ -30,12 +30,12 @@ const DashboardComponent: FC<Props> = ({ title, children }) => {
 
   return (
     <div className={`${isFullScreen ? styles['full-screen'] : ''}`}>
-      <div className={commonStyles['component-title']}>
+      <div className={styles['component-title']}>
         <h2>{title}</h2>
       </div>
       <div
-        className={`${commonStyles['buttons']} ${
-          buttons ? '' : commonStyles['right-align']
+        className={`${styles['buttons']} ${
+          buttons ? '' : styles['right-align']
         }`}
       >
         {buttons}
