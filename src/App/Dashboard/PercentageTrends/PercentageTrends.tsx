@@ -27,8 +27,6 @@ const getTitle = (titlePrefix: string, chartType: ChartType) =>
 const PercentageTrends: FC<Props> = ({ title, data, countryColors }) => {
   const [chartType, setChartType] = useState<ChartType>('growth-rate');
 
-  console.log('RENDER', chartType);
-
   return (
     <DashboardComponent title={getTitle(title, chartType)}>
       <DashboardComponentButtons>
@@ -36,7 +34,6 @@ const PercentageTrends: FC<Props> = ({ title, data, countryColors }) => {
           value={chartType}
           exclusive
           onChange={(_e, value) => {
-            console.log('!!! on change', value);
             value && setChartType(value);
           }}
           size='small'
