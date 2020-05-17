@@ -8,18 +8,11 @@ export const DashboardComponentContent: FC = ({ children }) => <>{children}</>;
 
 interface Props {
   title: string;
-  // children: ReactElement[];
   children:
     | ReactElement<
         typeof DashboardComponentContent | typeof DashboardComponentButtons
       >[]
     | ReactElement<typeof DashboardComponentContent>;
-  // children:
-  //   | ReactElement<
-  //       unknown,
-  //       'DashboardComponentButtons' | 'DashboardComponentContent'
-  //     >[]
-  //   | ReactElement<unknown, 'DashboardComponentContent'>;
 }
 
 const DashboardComponent: FC<Props> = ({ title, children }) => {
@@ -31,8 +24,6 @@ const DashboardComponent: FC<Props> = ({ title, children }) => {
   if (Array.isArray(children)) {
     buttons = children.filter((c) => c.type === DashboardComponentButtons)[0];
     content = children.filter((c) => c.type === DashboardComponentContent)[0];
-
-    console.log(children);
   } else {
     content = children;
   }
