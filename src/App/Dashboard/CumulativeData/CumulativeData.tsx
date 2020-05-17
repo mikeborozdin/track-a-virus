@@ -4,7 +4,7 @@ import { Timeseries } from '../types/Timeseries';
 import CountryColors from '../types/CountryColors';
 import DashboardComponent, {
   DashboardComponentContent,
-} from '../WithFullScreen/DashboardComponent';
+} from '../DashboardComponent/DashboardComponent';
 
 interface Props {
   title: string;

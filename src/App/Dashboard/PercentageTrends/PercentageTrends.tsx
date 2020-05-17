@@ -9,7 +9,7 @@ import DailyPercentageIncrease from './DailyPercentageIncrease/DailyPercentageIn
 import DashboardComponent, {
   DashboardComponentButtons,
   DashboardComponentContent,
-} from '../WithFullScreen/DashboardComponent';
+} from '../DashboardComponent/DashboardComponent';
 
 interface Props {
   title: string;

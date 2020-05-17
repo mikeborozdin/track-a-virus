@@ -1,7 +1,7 @@
 import React, { FC, useState, ReactElement } from 'react';
-import styles from '../charts/chart.css';
-import commonStyles from '../styles/common-dashboard-styles.css';
 import { Button } from '@material-ui/core';
+import styles from './DashboardComponent.css';
+import commonStyles from '../styles/common-dashboard-styles.css';
 
 export const DashboardComponentButtons: FC = ({ children }) => <>{children}</>;
 export const DashboardComponentContent: FC = ({ children }) => <>{children}</>;

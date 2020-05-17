@@ -9,7 +9,7 @@ import commonStyles from '../styles/common-dashboard-styles.css';
 import DashboardComponent, {
   DashboardComponentContent,
   DashboardComponentButtons,
-} from '../WithFullScreen/DashboardComponent';
+} from '../DashboardComponent/DashboardComponent';
 
 interface Props {
   title: string;
