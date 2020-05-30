@@ -5,12 +5,14 @@ import styles from '../chart.css';
 
 interface Props {
   data: Record<string, number>;
+  label: string;
   countryColors: CountryColors;
   chartOptions?: ChartOptions;
 }
 
 const getCountryDataForChartJs = (
   data: Record<string, number>,
+  label: string,
   countryColors: CountryColors
 ) => {
   const chartDatasets = [];
@@ -27,7 +29,7 @@ const getCountryDataForChartJs = (
     labels: Object.keys(data),
     datasets: [
       {
-        label: 'Growth rate %',
+        label,
         backgroundColor: Object.keys(data).map((c) => countryColors[c]),
         data: Object.values(data),
       },
@@ -73,6 +75,7 @@ const getChartOptions = (data: Record<string, number>): Chart.ChartOptions => {
 
 const CountryValueBarChart: FC<Props> = ({
   data,
+  label,
   countryColors,
   chartOptions,
 }) => {
@@ -86,12 +89,12 @@ const CountryValueBarChart: FC<Props> = ({
         setChart(
           new Chart(ctx, {
             type: 'bar',
-            data: getCountryDataForChartJs(data, countryColors),
+            data: getCountryDataForChartJs(data, label, countryColors),
             options: { ...getChartOptions(data), ...chartOptions },
           })
         );
       } else {
-        chart.data = getCountryDataForChartJs(data, countryColors);
+        chart.data = getCountryDataForChartJs(data, label, countryColors);
         chart.options = getChartOptions(data);
         chart.update();
       }
