@@ -69,12 +69,7 @@ const renderMortalityForSelectedCountries = (
       <h1>{title}</h1>
     </div>
     <div>
-      <Mortality
-        title={`${title}`}
-        cases={cases}
-        deaths={deaths}
-        countryColors={countryColors}
-      />
+      <Mortality cases={cases} deaths={deaths} countryColors={countryColors} />
     </div>
   </>
 );
