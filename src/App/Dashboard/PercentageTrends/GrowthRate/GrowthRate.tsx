@@ -21,6 +21,7 @@ const GrowthRate: FC<Props> = ({ data, countryColors }) => {
     <>
       <CountryValueBarChart
         data={growthRateByCountry}
+        label='Growth rate %'
         countryColors={countryColors}
       />
     </>

@@ -11,6 +11,7 @@ import LoadingSpinner from './LoadingSpinner/LoadingSpinner';
 import { Timeseries } from './types/Timeseries';
 import CountryColors from './types/CountryColors';
 import PercentageTrends from './PercentageTrends/PercentageTrends';
+import Mortality from './Mortality/Mortality';
 
 interface Props {
   dashboardStore?: DashboardStore;
@@ -51,6 +52,27 @@ const renderDataForSelectedCountries = (
       <PercentageTrends
         title={`${title}`}
         data={data}
+        countryColors={countryColors}
+      />
+    </div>
+  </>
+);
+
+const renderMortalityForSelectedCountries = (
+  title: string,
+  cases: Timeseries,
+  deaths: Timeseries,
+  countryColors: CountryColors
+) => (
+  <>
+    <div className={styles['span-all-col']}>
+      <h1>{title}</h1>
+    </div>
+    <div>
+      <Mortality
+        title={`${title}`}
+        cases={cases}
+        deaths={deaths}
         countryColors={countryColors}
       />
     </div>
@@ -120,6 +142,15 @@ const renderDashboard = (
     {dashboardStore.selectedCountriesDeaths &&
       renderDataForSelectedCountries(
         'Confirmed deaths',
+        dashboardStore.selectedCountriesDeaths,
+        dashboardStore.countryColors
+      )}
+
+    {dashboardStore.selectedCountriesCases &&
+      dashboardStore.selectedCountriesDeaths &&
+      renderMortalityForSelectedCountries(
+        'Mortality',
+        dashboardStore.selectedCountriesCases,
         dashboardStore.selectedCountriesDeaths,
         dashboardStore.countryColors
       )}
