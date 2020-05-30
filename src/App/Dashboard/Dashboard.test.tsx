@@ -8,6 +8,7 @@ import Select from 'react-select';
 import CumulativeData from './CumulativeData/CumulativeData';
 import DailyAbsoluteIncrease from './DailyAbsoluteIncrease/DailyAbsoluteIncrease';
 import PercentageTrends from './PercentageTrends/PercentageTrends';
+import Mortality from './Mortality/Mortality';
 
 const mockStore = (overrides = {}) =>
   (({
@@ -100,6 +101,10 @@ describe('Dashboard', () => {
     expect(percentageTrends.at(1).prop('data')).toBe(
       store.selectedCountriesDeaths
     );
+
+    const mortality = component.find(Mortality);
+    expect(mortality.prop('cases')).toBe(store.selectedCountriesCases);
+    expect(mortality.prop('deaths')).toBe(store.selectedCountriesDeaths);
   });
 
   test('Calls dashboard store when user selects different countries', () => {
